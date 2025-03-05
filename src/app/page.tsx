@@ -1,5 +1,3 @@
-import { BuildingPage } from "@/features/home";
+import { Homepage } from "@/features/home/";
 
-export default function Home() {
-  return <BuildingPage />;
-}
+export default Homepage;
