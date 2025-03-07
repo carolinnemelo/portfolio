@@ -1,3 +1,4 @@
-import { Homepage } from "@/features/home/";
+import { Homepage } from "@/features/home";
+
 
 export default Homepage;
