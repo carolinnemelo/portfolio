@@ -10,21 +10,21 @@
 }
 
 :root {
+  --background: red;
+  --foreground: oklch(0.141 0.005 285.823);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
 
-  --background: oklch(20% 0.14 150);
-  --foreground: oklch(3.9% 0.01 240);
   --card: oklch(100% 0 0);
   --card-foreground: oklch(3.9% 0.01 240);
   --popover: oklch(100% 0 0);
   --popover-foreground: oklch(3.9% 0.01 240);
-  --primary: oklch(36.3% 0.22 142.1);
-  --primary-foreground: oklch(97.3% 0.05 355.7);
-  --secondary: oklch(95.9% 0.015 240);
-  --secondary-foreground: oklch(10% 0.02 240);
-  --muted: oklch(95.9% 0.015 240);
-  --muted-foreground: oklch(46.1% 0.03 240);
   --accent: oklch(95.9% 0.015 240);
   --accent-foreground: oklch(10% 0.02 240);
+  --muted: oklch(95.9% 0.015 240);
+  --muted-foreground: oklch(46.1% 0.03 240);
   --destructive: oklch(60.2% 0.28 0);
   --destructive-foreground: oklch(98% 0 0);
   --border: oklch(90% 0.02 240);
@@ -47,17 +47,28 @@
   --sidebar-ring: oklch(0.707 0.022 261.325);
 }
 
+.dopamine {
+  --background: oklch(0.985 0 0);
+  --foreground: oklch(3.9% 0.01 240);
+  --primary: oklch(20% 0.14 150);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(95.9% 0.015 240);
+  --secondary-foreground: oklch(10% 0.02 240);
+}
+
+
 .dark {
-  --background: oklch(4.1% 0.015 20);
-  --foreground: oklch(95% 0 0);
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  
   --card: oklch(10% 0.02 24);
   --card-foreground: oklch(95% 0 0);
   --popover: oklch(9% 0 0);
   --popover-foreground: oklch(95% 0 0);
-  --primary: oklch(45.3% 0.22 142.1);
-  --primary-foreground: oklch(10% 0.16 144.9);
-  --secondary: oklch(15.9% 0.02 240);
-  --secondary-foreground: oklch(98% 0 0);
   --muted: oklch(15% 0 0);
   --muted-foreground: oklch(64.9% 0.06 240);
   --accent: oklch(15.1% 0.015 12);
