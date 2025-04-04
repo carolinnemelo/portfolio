@@ -3,15 +3,15 @@ import { SvgPoliceLine } from "./svg-police-line";
 
 export function BuildingPage() {
   return process.env.FF_NEW_BUILDING_PAGE === "ON" ? (
-    <main className="flex flex-col text-center h-screen justify-center w-screen">
-      <SvgPoliceLine pattern="arrow" className="top-5 rotate-2"/>
+    <main className="flex flex-col text-center h-screen justify-center w-full bg-secondary">
+      <SvgPoliceLine pattern="arrow" className="top-9 rotate-2"/>
       <PoliceLine
         className="-rotate-3 shadow-md z-10"
-        text="   Carolinne Melo   "
+        text="   Carolinne Melo    "
         repeat={10}
 
       />
-      <PoliceLine className="rotate-3 shadow-md z-10 top-2 " />
+      <PoliceLine className="rotate-6 shadow-md z-10 top-15 " />
       <SvgPoliceLine className="-top-8 -rotate-9"/>
     </main>
   ) : (
