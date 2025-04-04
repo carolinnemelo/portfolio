@@ -1,4 +1,5 @@
 import { PoliceLine } from ".";
+import { SvgPoliceLine } from "./svg-police-line";
 
 export function BuildingPage() {
   return process.env.FF_NEW_BUILDING_PAGE === "ON" ? (
@@ -10,7 +11,7 @@ export function BuildingPage() {
         repeat={10}
       />
       <PoliceLine className="rotate-3 shadow-md" />
-      <PoliceLine />
+      <SvgPoliceLine pattern="arrow"/>
     </main>
   ) : (
     <main className="flex min-h-screen items-center justify-center bg-gray-900 text-white">
