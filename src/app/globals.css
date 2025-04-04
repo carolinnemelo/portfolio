@@ -9,6 +9,20 @@
   --font-mono: var(--font-geist-mono);
 }
 
+
+@theme {
+  --animate-marquee: marquee 20s linear infinite;
+  @keyframes marquee {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+ 
+  }
+}
+
 :root {
   --background: oklch(0.985 0 0);
   --foreground: oklch(0.141 0.005 285.823);
