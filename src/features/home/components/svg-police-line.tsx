@@ -1,12 +1,15 @@
+import { cn } from "@/lib/utils";
+
 type Props = {
   pattern?: "diagonal" | "arrow";
+  className?: string;
 };
 
-export function SvgPoliceLine({ pattern = "diagonal" }: Props) {
+export function SvgPoliceLine({ pattern = "diagonal", className }: Props) {
   const patternId = pattern === "diagonal" ? "diagonalPattern" : "arrowPattern";
 
   return (
-    <div className="relative w-full overflow-hidden">
+    <div className={cn("relative w-full overflow-hidden", className)}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="0"
@@ -18,10 +21,10 @@ export function SvgPoliceLine({ pattern = "diagonal" }: Props) {
           <pattern
             id="diagonalPattern"
             width="20"
-            height="20"
+            height="25"
             patternUnits="userSpaceOnUse"
           >
-            <rect width="20" height="20" fill="#f0bb2b" />
+            <rect width="20" height="25" fill="#f0bb2b" />
             <line
               x1="0"
               y1="-10"
@@ -38,7 +41,6 @@ export function SvgPoliceLine({ pattern = "diagonal" }: Props) {
             height="20"
             patternUnits="userSpaceOnUse"
             patternTransform="scale(1.3)"
-
           >
             <rect width="20" height="20" fill="#f0bb2b" />
             <polyline
@@ -50,8 +52,8 @@ export function SvgPoliceLine({ pattern = "diagonal" }: Props) {
           </pattern>
         </defs>
       </svg>
-      <div className="animate-marquee inline-block w-full">
-        <svg xmlns="http://www.w3.org/2000/svg" height="25" width="200vw" >
+      <div className="animate-marquee-reverse inline-block w-full shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" height="25" width="200vw">
           <rect width="100%" height="100%" fill={`url(#${patternId})`} />
         </svg>
       </div>

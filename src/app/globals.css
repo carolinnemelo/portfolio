@@ -12,6 +12,7 @@
 
 @theme {
   --animate-marquee: marquee 20s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 20s linear infinite;
   @keyframes marquee {
     from {
       transform: translateX(-100%);
@@ -20,6 +21,14 @@
       transform: translateX(0);
     }
  
+  }
+  @keyframes marquee-reverse {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
   }
 }
 
