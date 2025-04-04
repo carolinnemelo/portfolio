@@ -1,11 +1,11 @@
-import { ChooseTheme, PoliceLine } from ".";
+import { PoliceLine } from ".";
 
 export function BuildingPage() {
-
   return process.env.FF_NEW_BUILDING_PAGE === "ON" ? (
     <main className="flex flex-col text-center h-screen justify-center">
-      <ChooseTheme />
-      <PoliceLine />
+      {/* <ChooseTheme /> */}
+      <PoliceLine className="rotate-3" />
+      <PoliceLine className="-rotate-6 shadow-md" text="Carolinne Melo " repeat={15} />
     </main>
   ) : (
     <main className="flex min-h-screen items-center justify-center bg-gray-900 text-white">
