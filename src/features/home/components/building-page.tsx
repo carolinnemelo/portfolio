@@ -4,8 +4,13 @@ export function BuildingPage() {
   return process.env.FF_NEW_BUILDING_PAGE === "ON" ? (
     <main className="flex flex-col text-center h-screen justify-center">
       {/* <ChooseTheme /> */}
-      <PoliceLine className="rotate-3" />
-      <PoliceLine className="-rotate-6 shadow-md" text="Carolinne Melo " repeat={15} />
+      <PoliceLine
+        className="-rotate-6 shadow-md"
+        text="   Carolinne Melo   "
+        repeat={10}
+      />
+      <PoliceLine className="rotate-3 shadow-md" />
+      <PoliceLine />
     </main>
   ) : (
     <main className="flex min-h-screen items-center justify-center bg-gray-900 text-white">

@@ -9,9 +9,11 @@ type Props = {
 
 export function PoliceLine({
   className,
-  text = "EXPERIMENTAL ZONE • PROCEED  WITH COFFEE • ",
+  text = "EXPERIMENTAL ZONE   •   PROCEED  WITH COFFEE    •    ",
   repeat = 5,
 }: Props) {
+  text = text.replace(/ {3}/g, "\u00A0\u00A0\u00A0");
+
   return (
     <div
       className={cn(
@@ -20,12 +22,12 @@ export function PoliceLine({
       )}
     >
       <div className="flex overflow-hidden font-bold dark:text-black">
-        <div className="whitespace-nowrap animate-marquee pr-0.5">
+        <div className="whitespace-nowrap animate-marquee pr-0.5 align-middle">
           {Array.from({ length: repeat }, (_, i) => (
             <span key={i}>{text}</span>
           ))}
         </div>
-        <div className="whitespace-nowrap animate-marquee">
+        <div className="whitespace-nowrap animate-marquee align-middle">
           {Array.from({ length: repeat }, (_, i) => (
             <span key={i}>{text}</span>
           ))}
