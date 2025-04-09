@@ -1,6 +1,6 @@
 import { BuildingPage } from "./building-page";
-import { ChooseTheme } from "./choose-theme";
+import { Hero } from "./hero";
 
 export function Homepage() {
-  return process.env.FF_HOMEPAGE === "ON" ? <ChooseTheme /> : <BuildingPage />;
+  return process.env.FF_HOMEPAGE === "ON" ? <Hero /> : <BuildingPage />;
 }
