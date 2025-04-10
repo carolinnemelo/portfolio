@@ -37,8 +37,7 @@
   --foreground: oklch(0.141 0.005 285.823);
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
-  /* changed to green */
-  --secondary: oklch(0.41 0.0888 264.71);
+  --secondary:oklch(0.62 0 145.06);
 
   --secondary-foreground: oklch(0.205 0 0);
 
