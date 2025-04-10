@@ -1,8 +1,6 @@
 @import "tailwindcss";
 
 @plugin "tailwindcss-animate";
-@plugin '@tailwindcss/typography';
-
 
 @custom-variant dark (&:is(.dark *));
 
@@ -11,13 +9,12 @@
   --font-accent: var(--font-fraunces);
 }
 
-
 @theme {
-  --animate-marquee: marquee 20s linear infinite;
-  --animate-marquee-reverse: marquee-reverse 20s linear infinite;
+  --animate-marquee: marquee 30s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 10s linear infinite;
   @keyframes marquee {
     from {
-      transform: translateX(-100%);
+      transform: translateX(-50%);
     }
     to {
       transform: translateX(0);
@@ -28,7 +25,7 @@
       transform: translateX(0);
     }
     to {
-      transform: translateX(-100%);
+      transform: translateX(-50%);
     }
   }
 }
