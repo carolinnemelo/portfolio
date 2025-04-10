@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export function Hero() {
   return (
-    <section className="flex flex-col items-center justify-center gap-16 md:flex-row-reverse bg-amber-400 py-16 md:py-32">
+    <section className="flex flex-col items-center justify-center gap-16 md:flex-row-reverse bg-secondary/50 py-16 md:py-32">
       <Image
         src={"/carolinne.avif"}
         alt="Carolinne Melo"
@@ -15,7 +15,7 @@ export function Hero() {
 
       <div className="flex flex-col justify-center px-4 gap-6">
         <h1 className="text-4xl md:text-6xl font-bold font-accent ">
-          {"Hi, I'm Carolinne."}
+          {"Hi, I'm Carolinne"}
         </h1>
         <h2 className="font-[300] text-xl">
           Brazilian developer who lives in Stockholm.

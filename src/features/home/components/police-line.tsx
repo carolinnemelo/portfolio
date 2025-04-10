@@ -17,11 +17,11 @@ export function PoliceLine({
   return (
     <div
       className={cn(
-        "relative w-full bg-yellow-300 justify-self-center py-1",
+        "relative w-full bg-muted justify-self-center py-1",
         className
       )}
     >
-      <div className="flex overflow-hidden font-bold dark:text-black bg-gradient-to-r from-amber-300 via-rose-400 to-amber-300">
+      <div className="flex overflow-hidden font-bold dark:text-black "> 
         <div className="whitespace-nowrap animate-marquee pr-0.5 align-middle">
           {Array.from({ length: repeat }, (_, i) => (
             <span key={i}>{text}</span>
