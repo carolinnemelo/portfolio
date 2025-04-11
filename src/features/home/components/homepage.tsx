@@ -4,7 +4,7 @@ import { SkillsIcons } from "./skills-icons";
 
 export function Homepage() {
   return (
-    <main className="flex flex-col gap-6 py-32">
+    <main className="flex flex-col gap-6 pb-32">
       <Hero />
       <SkillsIcons />
       <FoldableCard />

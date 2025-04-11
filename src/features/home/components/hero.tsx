@@ -13,19 +13,19 @@ export function Hero() {
         className="outline-2 outline-offset-16 rounded-full outline-background"
       />
 
-      <div className="flex flex-col justify-center px-4 gap-6">
+      <div className="flex flex-col justify-center px-4 gap-6 w-[60%]">
         <h1 className="text-4xl md:text-6xl font-bold font-accent ">
           {"Hi, I'm Carolinne"}
         </h1>
         <h2 className="font-[300] text-xl">
-          Brazilian developer who lives in Stockholm.
+          JavaScript, TypeScript, React, Next.js & more.
         </h2>
         <p className="text-lg text-neutral-800">
           I see code as the means to an end, the way I bring ideas to life.
-          <br />
           My style is constantly changing.
           <br />
-          This site is my playground, my portfolio, my little rebellion.
+          <br />
+          This site is my playground and my portfolio.
         </p>
         <Button
           size="lg"
