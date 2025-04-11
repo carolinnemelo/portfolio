@@ -37,7 +37,7 @@
         rgba(0, 0, 0, 0.4) 0%,
         rgba(0, 0, 0, 0) 20%
       ),
-      url("/amazon.avif");
+      url("/alive.avif");
     background-size: 300%;
     background-position: 0%;
   }
