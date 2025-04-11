@@ -44,7 +44,7 @@ export function FoldableCard() {
               variants={{ open: { rotate: 0 }, hovering: { rotate: 0 } }}
               whileHover="hovering"
               initial={{ rotate: 3 }}
-              className="mx-auto grid aspect-video md:h-[60vh] p-8"
+              className="mx-auto grid aspect-[7/5] md:h-[60vh]"
             >
               <div className="aspect-[7/5] h-full w-full grid grid-cols-3 [grid-area:1/1]">
                 <motion.div
