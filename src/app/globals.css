@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@tailwind utilities;
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
@@ -30,6 +30,25 @@
   }
 }
 
+@layer components {
+  .map-image {
+    background-image: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.4) 0%,
+        rgba(0, 0, 0, 0) 20%
+      ),
+      url("/amazon.avif");
+    background-size: 300%;
+    background-position: 0%;
+  }
+  .map-image:nth-child(2) {
+    background-position: 0% 33.3%, 50%;
+  }
+  .map-image:nth-child(3) {
+    background-position: 0% 66.6%,100%;
+  }
+}
+
 :root {
   --font-roboto: "Roboto", sans-serif;
   --font-fraunces: "Fraunces", serif;
@@ -37,7 +56,7 @@
   --foreground: oklch(0.141 0.005 285.823);
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary:oklch(0.62 0 145.06);
+  --secondary: oklch(0.62 0 145.06);
 
   --secondary-foreground: oklch(0.205 0 0);
 
