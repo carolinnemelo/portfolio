@@ -13,10 +13,10 @@
   --animate-marquee: marquee 30s linear infinite;
   --animate-marquee-reverse: marquee-reverse 10s linear infinite;
   @keyframes marquee {
-    from {
+    0% {
       transform: translateX(-50%);
     }
-    to {
+    100% {
       transform: translateX(0);
     }
   }
@@ -25,7 +25,7 @@
       transform: translateX(0);
     }
     to {
-      transform: translateX(-50%);
+      transform: translateX(-100%);
     }
   }
 }

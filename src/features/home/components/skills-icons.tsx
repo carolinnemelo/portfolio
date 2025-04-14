@@ -27,24 +27,35 @@ export function SkillsIcons({ className }: Props) {
   ];
 
   return (
-    <section className={cn("overflow-hidden text-primary py-2 items-center", className)}>
-      <div className="animate-marquee whitespace-nowrap max-w-fit flex w-[100%] gap-10">
-        {skills.map((skill) => (
-          <div
-            className="p-8 bg-gradient-to-br  from-transparent via-transparent to-zinc-400/10 shadow rounded-lg  col-start-2"
-            key={skill.name}
-          >
-            {skill.icon}
+    <section
+      className={cn(
+        "overflow-hidden text-primary py-2 items-center",
+        className
+      )}
+    >
+      <div className="relative w-full overflow-hidden">
+        <div className="inline-flex whitespace-nowrap animate-marquee">
+          <div className="inline-flex gap-10 px-5">
+            {skills.map((skill) => (
+              <div
+                className="p-8 bg-gradient-to-br from-transparent via-transparent to-zinc-400/10 shadow rounded-lg"
+                key={skill.name}
+              >
+                {skill.icon}
+              </div>
+            ))}
           </div>
-        ))}
-        {skills.map((skill) => (
-          <div
-            className="p-8 bg-gradient-to-br from-transparent via-transparent to-zinc-400/10 shadow rounded-lg  col-start-2"
-            key={skill.name + "2"}
-          >
-            {skill.icon}
+          <div className="inline-flex gap-10 px-5">
+            {skills.map((skill) => (
+              <div
+                className="p-8 bg-gradient-to-br from-transparent via-transparent to-zinc-400/10 shadow rounded-lg"
+                key={skill.name + "-copy"}
+              >
+                {skill.icon}
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </section>
   );

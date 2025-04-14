@@ -13,17 +13,19 @@ export function Hero() {
         className="outline-2 outline-offset-16 rounded-full outline-background"
       />
 
-      <div className="flex flex-col justify-center px-4 gap-6 w-[60%]">
-        <h1 className="text-4xl md:text-6xl font-bold font-accent ">
-          {"Hi, I'm Carolinne"}
-        </h1>
-        <h2 className="font-[300] text-xl">
-          JavaScript, TypeScript, React, Next.js & more.
-        </h2>
-        <p className="text-lg text-neutral-800">
-          I see code as the means to an end, the way I bring ideas to life.
-          My style is constantly changing.
-          <br />
+      <div className="flex flex-col justify-center px-4 pt-16 gap-6 w-[60%]">
+        <div className="space-y-2">
+          <h1 className="text-4xl md:text-6xl font-bold font-accent ">
+            {"Hi, I'm Carolinne"}
+          </h1>
+          <h2 className="font-[400] text-2xl">
+          I work with JavaScript, TypeScript, React, Next.js, Figma & more.
+          </h2>
+        </div>
+        <p className="text-xl text-neutral-800 font-[300]">
+          My background is in architecture. Now I also design in code. I care
+          about how things look and how they work. I build clean, useful
+          interfaces using modern tools.
           <br />
           This site is my playground and my portfolio.
         </p>
