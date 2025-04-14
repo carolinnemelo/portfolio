@@ -29,7 +29,7 @@ export function SkillsIcons({ className }: Props) {
   return (
     <section
       className={cn(
-        "overflow-hidden text-primary py-2 items-center",
+        "overflow-hidden text-primary py-6 items-center",
         className
       )}
     >
@@ -38,7 +38,7 @@ export function SkillsIcons({ className }: Props) {
           <div className="inline-flex gap-10 px-5">
             {skills.map((skill) => (
               <div
-                className="p-8 bg-gradient-to-br from-transparent via-transparent to-zinc-400/10 shadow rounded-lg"
+                className="p-8 bg-gradient-to-br from-white  to-zinc-400/10 shadow rounded-lg"
                 key={skill.name}
               >
                 {skill.icon}
@@ -48,7 +48,7 @@ export function SkillsIcons({ className }: Props) {
           <div className="inline-flex gap-10 px-5">
             {skills.map((skill) => (
               <div
-                className="p-8 bg-gradient-to-br from-transparent via-transparent to-zinc-400/10 shadow rounded-lg"
+                className="p-8 bg-gradient-to-br from-white  to-zinc-400/10 shadow rounded-lg"
                 key={skill.name + "-copy"}
               >
                 {skill.icon}
