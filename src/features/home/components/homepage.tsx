@@ -3,6 +3,7 @@ import { PortableText } from "next-sanity";
 import { FoldableCard } from "./foldable-card";
 import { Hero } from "./hero";
 import { SkillsIcons } from "./skills-icons";
+import { CarouselDemo } from "@/components";
 
 export async function Homepage() {
   const about = await client.fetch(`
@@ -26,9 +27,22 @@ export async function Homepage() {
         <h2 className="text-2xl font-bold text-center">
           This was born from a quick Figma study while I was imagining a game.
         </h2>
+        <h3 className="text-2xl text-center">
+          Three different moods shaped by design choices.
+        </h3>
+        <CarouselDemo />
+        <article className="w-full flex flex-col items-center justify-center">
+          <p className="">
+            One feels urgent and post-apocalyptic, with harsh textures and bold
+            contrast. Another feels dreamy, almost magical, with soft lighting
+            and surreal colors. The last one is quiet and grounded. More real.
+            More raw. I wanted to see how much the mood could shift, just
+            through color, texture, and type. No animation. No sound. Just
+            feeling.
+          </p>
+        </article>
         <FoldableCard />
       </article>
-
     </main>
   );
 }
