@@ -26,7 +26,7 @@ const carouselImages = [
     title: "The world isn’t loud anymore",
     text: `
           The noise is gone. What’s left is structure, shadow, and silence.
-          The layout slows everything down — centered, steady, deliberate.
+          The layout slows everything down, centered, steady, deliberate.
           It’s not calm. It’s caution.
         `,
     alt: "city",
@@ -37,9 +37,8 @@ const carouselImages = [
     title: "A gentle world, full of color",
     text: `
           Earlier concepts felt intense and overwhelming. This version was created to feel welcoming. 
-          Saturated blues and greens bring the forest to life, while soft lighting and layered composition 
-          create depth and calm. The scene was designed to feel magical and safe—something children would want 
-          to explore and parents would feel good about. It suggests wonder and fantasy with clarity and warmth.
+          Saturated blues and greens bring the forest to life.
+          The scene was designed to feel magical and safe.
         `,
     alt: "blue",
     bgColor: "bg-sky-950",
@@ -70,7 +69,7 @@ export function CarouselDemo({ items = carouselImages }: Props) {
         return;
       }
       carouselApi?.scrollNext();
-    }, 8000);
+    }, 50000);
     return () => {
       clearInterval(interval);
     };
@@ -82,7 +81,7 @@ export function CarouselDemo({ items = carouselImages }: Props) {
           <CarouselItem
             key={item.alt}
             className={cn(
-              "min-w-full flex flex-col items-center justify-center gap-10 py-10 text-center text-primary-foreground",
+              "min-w-full py-10 flex flex-col items-center justify-center gap-10 text-center text-primary-foreground",
               item.bgColor
             )}
           >
