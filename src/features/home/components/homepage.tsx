@@ -4,8 +4,13 @@ import { FoldableCard } from "./foldable-card";
 import { Hero } from "./hero";
 import { SkillsIcons } from "./skills-icons";
 import { CarouselDemo } from "@/components";
+import { env } from "process";
 
 export async function Homepage() {
+  
+  
+
+
   const about = await client.fetch(`
     *[_type == "about"][0]{
     title,
@@ -30,17 +35,7 @@ export async function Homepage() {
         <h3 className="text-2xl text-center">
           Three different moods shaped by design choices.
         </h3>
-        <CarouselDemo />
-        <article className="w-full flex flex-col items-center justify-center">
-          <p className="">
-            One feels urgent and post-apocalyptic, with harsh textures and bold
-            contrast. Another feels dreamy, almost magical, with soft lighting
-            and surreal colors. The last one is quiet and grounded. More real.
-            More raw. I wanted to see how much the mood could shift, just
-            through color, texture, and type. No animation. No sound. Just
-            feeling.
-          </p>
-        </article>
+       { env.FF_HOMEPAGE_SECTION === "ON" && <CarouselDemo />}
         <FoldableCard />
       </article>
     </main>
