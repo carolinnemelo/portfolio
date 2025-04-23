@@ -53,13 +53,20 @@ type Props = {
     alt: string;
     bgColor: string;
   }[];
+  variant?: "carousel" | "default";
+  classname?: string;
 };
 
-export function GameCard({ items = carouselImages }: Props) {
-  return (
+export function GameCard({
+  items = carouselImages,
+  variant = "default",
+  classname,
+}: Props) {
+  return variant === "carousel" ? (
     <Card
       className={cn(
-        "border-0 shadow-none rounded-none max-w-xs bg-transparent text-center prose p-0"
+        "border-0 shadow-none rounded-none max-w-xs bg-transparent text-center prose p-0",
+        classname
       )}
     >
       <CardContent>
@@ -84,8 +91,25 @@ export function GameCard({ items = carouselImages }: Props) {
           <CarouselNext />
           <CarouselPrevious />
         </Carousel>
-   
       </CardContent>
     </Card>
+  ) : (
+    <div
+      className={cn(
+        "flex gap-6", classname
+      )}
+    >
+      {items.map((item) => (
+        <Image
+          src={item.src}
+          alt={item.alt}
+          width={200}
+          height={500}
+          className="rounded-2xl md:max-w-xs"
+          loading="lazy"
+          key={item.src}
+        />
+      ))}
+    </div>
   );
 }
