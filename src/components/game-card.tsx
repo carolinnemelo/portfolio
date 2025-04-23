@@ -1,5 +1,13 @@
+import { cn } from "@/lib/utils";
 import { Card, CardContent } from "./ui";
 import Image from "next/image";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "./ui/carousel";
 
 const carouselImages = [
   {
@@ -48,21 +56,36 @@ type Props = {
 };
 
 export function GameCard({ items = carouselImages }: Props) {
-  const cards = items.map((item) => (
-    <Card key={item.title}>
+  return (
+    <Card
+      className={cn(
+        "border-0 shadow-none rounded-none max-w-xs bg-transparent text-center prose p-0"
+      )}
+    >
       <CardContent>
-        <h2 className="text-3xl font-bold px-4">{item.title}</h2>
-        <Image
-          src={item.src}
-          alt={item.alt}
-          width={250}
-          height={500}
-          className="rounded-2xl md:max-w-3xs"
-          loading="lazy"
-        />
-        <p className="text-lg px-4">{item.text}</p>
+        <Carousel>
+          <CarouselContent>
+            {items.map((item) => (
+              <CarouselItem
+                key={item.src}
+                className="flex items-center justify-center"
+              >
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  width={250}
+                  height={500}
+                  className="rounded-2xl md:max-w-3xs"
+                  loading="lazy"
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselNext />
+          <CarouselPrevious />
+        </Carousel>
+   
       </CardContent>
     </Card>
-  ));
-  return cards;
+  );
 }
