@@ -3,7 +3,6 @@ import { PortableText } from "next-sanity";
 import { Hero } from "./hero";
 import { SkillsIcons } from "./skills-icons";
 import { GameCard } from "@/components";
-import { env } from "process";
 
 export async function Homepage() {
   const about = await client.fetch(`
@@ -24,18 +23,14 @@ export async function Homepage() {
         </div>
       </article>
       <article
-        className={`text-center flex flex-col gap-12 items-center justify-center px-4 pt-16 md:py-24 md:px-16`}
+        className={`text-center flex flex-col gap-12 items-center justify-center px-4 pt-16 md:py-24 md:px-16 bg-secondary`}
       >
         <h2 className="text-3xl font-bold">
           How It Feels, Not Just How It Looks
         </h2>
         <div className="flex flex-col items-center justify-center md:gap-12">
-          {env.FF_HOMEPAGE_SECTION === "ON" && (
-            <>
               <GameCard variant="carousel" classname="md:hidden" />
               <GameCard classname="hidden md:flex" />
-            </>
-          )}
 
           <p className="text-xl">
             I designed three versions of the same screen to explore how layout,
