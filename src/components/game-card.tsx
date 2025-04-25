@@ -65,7 +65,7 @@ export function GameCard({
   return variant === "carousel" ? (
     <Card
       className={cn(
-        "border-0 shadow-none rounded-none max-w-xs bg-transparent text-center prose p-0",
+        "border-0 shadow-none rounded-none max-w-xs bg-transparent text-center prose",
         classname
       )}
     >
