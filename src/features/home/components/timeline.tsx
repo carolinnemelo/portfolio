@@ -1,48 +1,47 @@
 import { TimelineItem } from "./timeline-item";
 
-import {
-  Sparkles,
-  Hammer,
-  Settings,
-  Brain,
-} from "lucide-react";
+import { Palette, Ruler, Sparkles, Laptop2, Brain } from "lucide-react";
 
 export const timelineItems = [
   {
+    icon: <Palette size={32} />,
+    title: "Creative beginnings",
+    subtitle:
+      "Before coding, I was already creating — logos, invitations, visual pieces for friends and family. That sense of care still lives in the interfaces I build.",
+  },
+  {
+    icon: <Ruler size={32} />,
+    title: "From architecture to interaction",
+    subtitle:
+      "Working as an architect taught me to think about structure, flow, and people. Code gave me a faster way to experiment and improve.",
+  },
+  {
     icon: <Sparkles size={32} />,
-    title: "Discovering Code as Creative Expression",
+    title: "That first 'it works' moment",
     subtitle:
-      "I was drawn to frontend development because I wanted to build things that felt alive — responsive to users and adaptable over time.",
+      "The first time I saw something I built work in the browser, I felt something shift. I wasn’t just learning — I was building.",
   },
   {
-    icon: <Hammer size={32} />,
-    title: "From Architecture to Interfaces",
+    icon: <Laptop2 size={32} />,
+    title: "Going all in",
     subtitle:
-      "My background in visual design and architecture gave me an eye for structure and aesthetics, which naturally evolved into designing and coding user interfaces.",
-  },
-  {
-    icon: <Settings size={32} />,
-    title: "Learning by Building: CI/CD & GitHub Actions",
-    subtitle:
-      "In my portfolio project, I configured a GitHub Actions workflow to automate deployment — applying DevOps practices to real-world code.",
+      "I joined a full-time bootcamp and started building real projects under pressure. That’s where I found rhythm, confidence, and collaboration.",
   },
   {
     icon: <Brain size={32} />,
-    title: "Experimenting with Sanity as Headless CMS",
+    title: "Learning by doing",
     subtitle:
-      "To better understand how a headless CMS works, I integrated Sanity into my own website and used it to manage this very timeline.",
+      "I set up GitHub Actions, explored Sanity as a CMS, and kept pushing myself to learn by actually shipping things.",
   },
 ];
 
+
 export function Timeline() {
   return (
-    <section className="text-center flex flex-col px-2  gap-10 md:px-16 py-6 md:py-12 md:items-center">
-      <div className="flex flex-col gap-2"> 
-        <h2>My Journey</h2>
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet
-          repellat.
-        </p>
+    <section className="text-center flex flex-col px-2  gap-10 md:px-16 py-6 md:py-30 md:items-center">
+      <div className="flex flex-col gap-2">
+        <h2 className="font-bold">My Journey</h2>
+        <p>This is me, figuring things out in public.</p>
       </div>
       <section className="relative pr-2">
         <span className="absolute left-2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-accent via-10% to-transparent" />

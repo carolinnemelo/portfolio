@@ -29,7 +29,7 @@ export function SkillsIcons({ className }: Props) {
   return (
     <section
       className={cn(
-        "overflow-hidden text-primary py-6 items-center",
+        "overflow-hidden text-primary pt-10 items-center",
         className
       )}
     >
