@@ -3,6 +3,8 @@ import { PortableText } from "next-sanity";
 import { Hero } from "./hero";
 import { SkillsIcons } from "./skills-icons";
 import { GameCard } from "@/components";
+import Image from "next/image";
+import { Timeline } from "./timeline";
 
 export async function Homepage() {
   const about = await client.fetch(`
@@ -13,15 +15,20 @@ export async function Homepage() {
     }`);
 
   return (
-    <main className="bg-teal-200 h-7 ">
+    <main className="bg-teal-200 h-7">
       <Hero />
       <SkillsIcons />
+      
+      <Timeline />
+
       <article className="text-center flex flex-col gap-12 px-2 md:px-16 py-6 md:py-12">
         <h2 className="text-3xl font-bold">{about.highlight}</h2>
         <div className="text-xl flex flex-col gap-4 ">
           <PortableText value={about.body} />
         </div>
       </article>
+
+
       <article
         className={`text-center flex flex-col gap-12 items-center justify-center px-4 pt-16 md:py-24 md:px-16 bg-secondary`}
       >
@@ -29,8 +36,8 @@ export async function Homepage() {
           How It Feels, Not Just How It Looks
         </h2>
         <div className="flex flex-col items-center justify-center md:gap-12">
-              <GameCard variant="carousel" classname="md:hidden" />
-              <GameCard classname="hidden md:flex" />
+          <GameCard variant="carousel" classname="md:hidden" />
+          <GameCard classname="hidden md:flex" />
 
           <p className="text-xl">
             I designed three versions of the same screen to explore how layout,
@@ -42,9 +49,21 @@ export async function Homepage() {
             The first one feels like chaos with loud colors, gritty textures,
             and a super cramped layout that kinda throws you right into the
             action. Then I tried something slower and quieter, more space, more
-            structure, like everything just paused for a second. The last one is
-            the chill version with soft light, cozy colors, something that feels
-            safe and a little magical.
+            structure, like everything just paused for a second.
+          </p>
+          <div className="relative w-full ">
+            <Image
+              src={"/game/blue45.avif"}
+              alt={"blue45"}
+              width={1000}
+              height={1000}
+              className=""
+              loading="lazy"
+            />
+          </div>
+          <p className="text-xl font-bold">
+            The last one is the chill version with soft light, cozy colors,
+            something that feels safe and a little magical.
           </p>
           <p className="text-xl font-bold">
             This experiment is about how visuals tell a story, even when the
