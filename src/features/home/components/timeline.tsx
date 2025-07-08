@@ -36,7 +36,7 @@ export const timelineItems = [
 
 export function Timeline() {
   return (
-    <section className="text-center flex flex-col px-2  gap-10 md:px-16 py-6 md:py-12">
+    <section className="text-center flex flex-col px-2  gap-10 md:px-16 py-6 md:py-12 md:items-center">
       <div className="flex flex-col gap-2"> 
         <h2>My Journey</h2>
         <p>
@@ -46,9 +46,9 @@ export function Timeline() {
       </div>
       <section className="relative pr-2">
         <span className="absolute left-2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-accent via-10% to-transparent" />
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 ">
           {timelineItems.map((item) => (
-            <div key={item.title} className="relative pl-6">
+            <div key={item.title} className="relative pl-6 md:px-12">
               <span className="absolute left-0 top-10 w-4 h-4 bg-accent rounded-full ring-4 ring-white" />
               <TimelineItem
                 title={item.title}

@@ -9,8 +9,8 @@ type Props = {
 
 export function TimelineItem({ icon, title, subtitle }: Props) {
   return (
-      <Card className="w-full">
-        <CardHeader className="flex flex-col items-center">
+      <Card className="w-full md:w-2xl gap-4">
+        <CardHeader className="flex flex-col items-center gap-4">
           {icon}
           <CardTitle className="text-xl">{title}</CardTitle>
         </CardHeader>
