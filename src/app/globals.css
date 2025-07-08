@@ -181,6 +181,9 @@
 }
 
 @layer base {
+  .text-paragraph {
+    color: var(--text-paragraph)
+  }
   * {
     @apply border-border outline-ring/50;
   }
