@@ -1,5 +1,6 @@
 import { Button } from "@/components";
 import Image from "next/image";
+import { FaGithub } from "react-icons/fa";
 
 export function Hero() {
   return (
@@ -15,7 +16,7 @@ export function Hero() {
 
       <div className="flex flex-col justify-center px-2 md:pt-16 gap-6 ">
         <div className="space-y-4">
-            <h1 className="leading-loose text-4xl md:text-6xl font-bold font-accent bg-gradient-to-r from-blue-500 from-[10%] via-pink-500 via-[30%] to-yellow-500 to-[60%] bg-clip-text text-transparent">
+          <h1 className="leading-loose text-4xl md:text-6xl font-bold font-accent bg-gradient-to-r from-blue-500 from-[10%] via-pink-500 via-[30%] to-yellow-500 to-[60%] bg-clip-text text-transparent">
             {"Hi, I'm Carolinne"}
           </h1>
           <h2 className="text-2xl">
@@ -32,10 +33,17 @@ export function Hero() {
         <Button
           size="lg"
           variant={"accent"}
-          disabled
           className="text-lg w-fit disabled:bg-muted disabled:text-muted-foreground"
         >
-          Explore My Work
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/carolinnemelo"
+            className="flex items-center gap-2"
+          >
+            <FaGithub/>
+            Github
+          </a>
         </Button>
       </div>
     </section>

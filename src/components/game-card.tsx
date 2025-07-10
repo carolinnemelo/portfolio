@@ -9,6 +9,7 @@ import {
   CarouselPrevious,
 } from "./ui/carousel";
 
+
 const carouselImages = [
   {
     src: "/game/red.avif",
@@ -94,21 +95,25 @@ export function GameCard({
       </CardContent>
     </Card>
   ) : (
-    <div
-      className={cn(
-        "flex gap-6", classname
-      )}
-    >
+    <div className={cn("m-auto flex gap-6 w-full flex-wrap", classname)}>
       {items.map((item) => (
-        <Image
-          src={item.src}
-          alt={item.alt}
-          width={200}
-          height={500}
-          className="rounded-2xl md:max-w-xs"
-          loading="lazy"
+        <Card
           key={item.src}
-        />
+          className="flex flex-col text-start items-center max-w-sm"
+        >
+          <Image
+            src={item.src}
+            alt={item.alt}
+            width={400}
+            height={400}
+            className="w-[15vw]"
+            loading="lazy"
+          />
+          <CardContent className="">
+            <h3 className="text-xl font-bold">{item.title}</h3>
+            <p className="text-lg">{item.text}</p>
+          </CardContent>
+        </Card>
       ))}
     </div>
   );
