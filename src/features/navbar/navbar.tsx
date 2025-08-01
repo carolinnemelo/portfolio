@@ -53,13 +53,12 @@ export function Navbar() {
         Carolinne Melo
       </Link>
       <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-        <DropdownMenuTrigger asChild>
-            {isMenuOpen ? (
-              <FaHamburger className="text-2xl text-accent"  />
-            ) : (
-              <Menu className="text-2xl" strokeWidth={2.5} />
-
-            )}
+        <DropdownMenuTrigger asChild className="md:hidden">
+          {isMenuOpen ? (
+            <FaHamburger className="text-2xl text-accent" />
+          ) : (
+            <Menu className="text-2xl" />
+          )}
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-white/30 backdrop-blur-lg shadow-sm ">
           {navLinks.map((link) => {
