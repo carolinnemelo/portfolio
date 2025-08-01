@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation"; // Importa o hook para obter a rota atual
+import { usePathname } from "next/navigation";
 import {
   NavigationMenu,
   NavigationMenuList,
@@ -8,6 +8,14 @@ import {
   NavigationMenuLink,
 } from "@radix-ui/react-navigation-menu";
 import Link from "next/link";
+import { FaHamburger } from "react-icons/fa";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Menu } from "lucide-react";
 
 export function Navbar() {
   const navLinks = [
@@ -17,8 +25,12 @@ export function Navbar() {
     { href: "/contact", label: "Contact" },
   ];
   const [isVisible, setIsVisible] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
@@ -33,12 +45,40 @@ export function Navbar() {
 
   return (
     <NavigationMenu
-      className={`md:px-14 flex items-center justify-between fixed w-full h-12 bg-white/30 backdrop-blur-lg shadow-sm z-50 transition-transform duration-500 ${
+      className={`px-2 flex items-center justify-between w-full fixed md:px-14 h-12 bg-white/30 backdrop-blur-lg shadow-sm z-10 transition-transform duration-500 ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <span className="text-primary">Carolinne Melo</span>
-      <NavigationMenuList className="flex gap-4">
+      <Link href="/" className="text-primary font-bold grow">
+        Carolinne Melo
+      </Link>
+      <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+        <DropdownMenuTrigger asChild>
+            {isMenuOpen ? (
+              <FaHamburger className="text-2xl text-accent"  />
+            ) : (
+              <Menu className="text-2xl" strokeWidth={2.5} />
+
+            )}
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="bg-white/30 backdrop-blur-lg shadow-sm ">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <DropdownMenuItem
+                key={link.href}
+                className={`${isActive && "bg-white/70"}`}
+              >
+                <Link href={link.href} className="text-primary">
+                  {link.label}
+                </Link>
+              </DropdownMenuItem>
+            );
+          })}
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <NavigationMenuList className="hidden md:flex gap-4">
         {navLinks.map((link) => {
           const isActive = pathname === link.href;
           return (

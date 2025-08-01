@@ -18,6 +18,9 @@ const fraunces = Fraunces({
 export const metadata: Metadata = {
   title: "Carolinne Melo",
   description: "I am a full-stack developer",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

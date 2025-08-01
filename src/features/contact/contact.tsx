@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { FaEnvelope } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 export function Contact() {
   const [subject, setSubject] = useState("");
@@ -61,17 +61,30 @@ export function Contact() {
           </button>
         </form>
 
-        {/* Contact Info */}
-        <div className="flex items-center gap-4">
-          <div className="p-4 bg-primary rounded-full">
-            <FaEnvelope className="text-white text-2xl" />
-          </div>
-          <div>
-            <p className="text-lg text-muted-foreground">Email</p>
-            <p className="text-primary font-semibold">
-              carolinnepmelo@gmail.com
-            </p>
-          </div>
+        {/* Social Links */}
+        <div className="flex items-center gap-6 justify-center mt-8">
+          <a
+            href="https://github.com/carolinnemelo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:text-accent transition"
+          >
+            <FaGithub className="text-3xl" />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/carolinnemelo/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:text-accent transition"
+          >
+            <FaLinkedin className="text-3xl" />
+          </a>
+          <a
+            href="mailto:carolinnepmelo@gmail.com"
+            className="text-primary hover:text-accent transition"
+          >
+            <FaEnvelope className="text-3xl" />
+          </a>
         </div>
       </div>
     </section>
