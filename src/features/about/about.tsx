@@ -12,7 +12,6 @@ export function About() {
         description={
           "I’m a naturally curious problem-solver who loves turning ideas into polished web experiences. I’m detail-oriented, thrive on collaboration, and enjoy crafting interfaces that feel intuitive and human. Always eager to learn and adapt, I bring energy and empathy to every project. Want to see how I work? Check out my projects and resume."
         }
-        imageSrc="/tablet.jpeg"
         portfolioUrl="/projects"
         resumeUrl="/resume"
       />

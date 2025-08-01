@@ -1,18 +1,9 @@
 import Link from "next/link";
 import {
-  SiJavascript,
   SiReact,
-  SiAngular,
-  SiVuedotjs,
   SiNodedotjs,
-  SiPython,
-  SiPhp,
-  SiNpm,
-  SiGulp,
   SiHtml5,
   SiCss3,
-  SiSass,
-  SiLess,
   SiDocker,
   SiExpo,
   SiFramer,
@@ -122,26 +113,7 @@ export function WhatIDoSection() {
         ))}
       </div>
 
-      <div className="mt-16 flex justify-center">
-        <Link
-          href="/services"
-          className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white py-3 px-6 rounded-md transition-colors"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
-              clipRule="evenodd"
-            />
-          </svg>
-          Services & Pricing
-        </Link>
-      </div>
+      
     </section>
   );
 }
