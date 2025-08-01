@@ -7,139 +7,163 @@ import { Education } from "./components/education";
 import { SkillsSection } from "./components/skills-section";
 import { LanguagesSection } from "./components/languages-section";
 import { InterestsSection } from "./components/interests-section";
-import { DownloadButton } from "./components/download-button";
+import { Button } from "@/components";
+import Link from "next/link";
 
 export function Resume() {
-  const workExperiences = [
-    {
-      position: "Frontend Developer",
-      company: "TribuSoft",
-      period: "2023 - Present",
-      summary: "Led frontend development for client projects using React, Next.js, and TypeScript. Implemented responsive designs and optimized performance for better user experience.",
-      responsibilities: [
-        "Built responsive interfaces using React and Next.js with TypeScript",
-        "Optimized website performance and SEO through improved content structure",
-        "Collaborated closely with designers to implement pixel-perfect layouts"
-      ]
-    },
-    {
-      position: "Fullstack Developer",
-      company: "School of Applied Technology",
-      period: "2022 - 2023",
-      summary: "Developed full-stack applications using React, Node.js, and PostgreSQL. Practiced test-driven development and pair programming in an agile environment.",
-      responsibilities: [
-        "Created RESTful APIs with Node.js and Express",
-        "Designed database schemas and implemented ORM solutions",
-        "Practiced agile methodologies with daily standups and sprint planning"
-      ]
-    },
-    {
-      position: "Junior Web Developer",
-      company: "Previous Company",
-      period: "2020 - 2022",
-      summary: "Assisted in developing and maintaining client websites using HTML, CSS, and JavaScript.",
-      responsibilities: [
-        "Implemented responsive designs and basic frontend functionality",
-        "Collaborated with senior developers on larger projects and bug fixes",
-        "Contributed to internal documentation and process improvements"
-      ]
-    }
-  ];
 
-  const educationItems = [
-    {
-      degree: "Fullstack JavaScript Development",
-      institution: "School of Applied Technology",
-      location: "Stockholm, Sweden",
-      period: "2022",
-      description: "Intensive bootcamp focused on modern JavaScript development practices, including React, Node.js, and TDD."
-    },
-    {
-      degree: "Fullstack JavaScript Development",
-      institution: "Chas Academy",
-      location: "Stockholm, Sweden",
-      period: "2021",
-      description: "Vocational program covering web development fundamentals, including HTML/CSS, JavaScript, and basic backend development."
-    },
-    {
-      degree: "Architecture and Urban Planning",
-      institution: "University Name",
-      location: "Location",
-      period: "2015 - 2020",
-      description: "Bachelor's degree with focus on architectural design principles, spatial thinking, and project planning."
-    }
-  ];
+const workExperiences = [
+  {
+    position: "Frontend & Content Developer",
+    company: "TribuSoft",
+    period: "April 2025 to Present",
+    summary:
+      "I build and update websites using WordPress, create responsive pages and publish content optimized for clarity and SEO. I collaborate with designers and project leads to align layout and messaging.",
+    responsibilities: []
+  },
+  {
+    position: "Fullstack Developer",
+    company: "SALT",
+    period: "February 2025 to June 2025",
+    summary:
+      "I worked across the stack with React, TypeScript, Node.js and Next.js using the App Router and Server Components. I improved component consistency, adapted backend data with Drizzle to match UI needs and contributed in agile sprints with frequent pair programming.",
+    responsibilities: []
+  },
+  {
+    position: "Barista",
+    company: "Brod & Salt Bageri AB",
+    period: "March 2023 to April 2024",
+    summary:
+      "I adapted quickly to customer-facing work, took initiative and handled responsibilities usually given to experienced staff.",
+    responsibilities: []
+  },
+  {
+    position: "Architect",
+    company: "Sahlin Inredningsarkitekter",
+    period: "January 2022 to June 2023",
+    summary:
+      "I designed interiors for homes and commercial spaces with a focus on layout, flow and usability, keeping visual details aligned with client needs and constraints.",
+    responsibilities: []
+  },
+  {
+    position: "BIM Intern",
+    company: "SAM Konsult",
+    period: "June 2021 to August 2021",
+    summary:
+      "I modeled a preschool in Revit from 2D plans and delivered the full 3D structure with technical documentation.",
+    responsibilities: []
+  }
+];
 
-  const skillCategories = [
-    {
-      title: "Technical",
-      skills: [
-        "JavaScript/TypeScript/React",
-        "Node.js/Express",
-        "HTML5/CSS3/Tailwind",
-        "PostgreSQL/MongoDB",
-        "RESTful APIs",
-        "Git/GitHub/CI/CD"
-      ]
-    },
-    {
-      title: "Soft Skills",
-      skills: [
-        "Problem-solving",
-        "Communication",
-        "Teamwork",
-        "Time management",
-        "Adaptability"
-      ]
-    }
-  ];
+const educationItems = [
+  {
+    degree: "Fullstack JavaScript",
+    institution: "SALT",
+    location: "Stockholm, Sweden",
+    period: "September 2024 to January 2025",
+    description:
+      "Full time program focused on TypeScript, Next.js with App Router and Server Components, Express and TDD. Agile sprints with daily standups, pair programming and production ready delivery."
+  },
+  {
+    degree: "Fullstack JavaScript",
+    institution: "Chas Academy – Yrkeshögskola",
+    location: "Stockholm, Sweden",
+    period: "August 2023 to August 2024",
+    description:
+      "Vocational program in modern web development covering JavaScript fundamentals, REST APIs, databases, version control and team based projects with tools like Axios, Next.js and Vite."
+  },
+  {
+    degree: "Bachelor of Architecture",
+    institution: "UFPA, Brazil",
+    location: "Belém, Brazil",
+    period: "March 2012 to December 2017",
+    description:
+      "Training in structured thinking, design systems, spatial logic and user focused solutions."
+  }
+];
 
-  const languages = [
-    { name: "English", level: "Professional" },
-    { name: "Portuguese", level: "Native" },
-    { name: "Swedish", level: "Conversational" }
-  ];
+const skillCategories = [
+  {
+    title: "Technical",
+    skills: [
+      "TypeScript and JavaScript",
+      "React and Next.js",
+      "Tailwind CSS",
+      "Figma and Framer Motion",
+      "Node.js and Express",
+      "Drizzle ORM and PostgreSQL",
+      "REST APIs",
+      "CI/CD and GitHub Actions",
+      "TDD, Agile and Pair Programming",
+      "Feature Flags",
+      "Docker",
+      "React Native"
+    ]
+  },
+  {
+    title: "Soft Skills",
+    skills: [
+      "Curiosity and continuous learning",
+      "Problem solving",
+      "Collaboration and empathy",
+      "Time management",
+      "Adaptability"
+    ]
+  }
+];
 
-  const interests = [
-    "Architecture", "Design", "Photography", "Travel", "Reading", "Hiking"
-  ];
+const languages = [
+  "English",
+  "Portuguese",
+  "Swedish"
+];
 
-  const profileSummary = "I'm a Frontend Developer with a background in architecture, bringing a design-oriented approach to web development. With expertise in React and TypeScript, I create responsive and accessible interfaces that prioritize user experience. My architectural thinking helps me build structured, scalable applications and work effectively across the development stack. My goal is to create digital spaces that are both aesthetically pleasing and functionally robust.";
+const interests = [
+  "UI and UX Design",
+  "Web Design",
+  "Design Systems",
+  "Accessibility",
+  "Mobile Development",
+  "Data Visualization",
+  "Photography",
+  "Cooking",
+  "Hiking",
+  "Travel",
+  "Reading"
+];
+
+const profileSummary =
+  "I am a frontend focused fullstack developer. I build responsive and user friendly web apps with TypeScript, React, Next.js and Tailwind CSS. I like clean, reusable code and fast feedback. I enjoy working in agile teams to ship interfaces that feel intuitive and polished.";
+
 
   return (
-    <div className=" py-10 px-4 min-h-screen">
-      <div className="max-w-5xl mx-auto bg-white shadow-md rounded-sm p-8 md:p-12">
-        <ResumeHeader 
-          name="CAROLINNE MELO"
-          title="Frontend Developer"
-        />
-        
-        <ProfileSummary 
+    <div className="py-16 md:px-4 min-h-screen">
+      <div className="max-w-5xl mx-auto bg-white shadow-md md:rounded-sm p-8 md:p-12">
+        <ResumeHeader name="CAROLINNE MELO" title="Frontend Developer" />
+
+        <ProfileSummary
           imageSrc="/carolinne.avif"
           altText="Carolinne Melo"
           summary={profileSummary}
         />
-        
+
         <div className="flex flex-col md:flex-row gap-10">
-          {/* Left Column - Work Experience & Education */}
           <div className="md:w-3/4">
             <WorkExperience experiences={workExperiences} />
             <Education educationItems={educationItems} />
           </div>
-          
-          {/* Right Column - Skills & Other Info */}
-          <div className="md:w-1/4 border-l pl-8">
+
+          <div className="md:w-1/4 md:border-l md:pl-8 ">
             <SkillsSection categories={skillCategories} />
             <LanguagesSection languages={languages} />
             <InterestsSection interests={interests} />
           </div>
         </div>
-        
+
         <div className="mt-10 text-center">
-          <DownloadButton 
-            filePath="/carolinne-melo-resume.pdf"
-            label="Download PDF Version"
-          />
+          <Button variant={"accent"}>
+            <Link href="/contact">Contact Me</Link>
+          </Button>
         </div>
       </div>
     </div>

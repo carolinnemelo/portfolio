@@ -19,7 +19,7 @@ export function SkillCard({
   gradientFrom,
   gradientTo,
 }: SkillCardProps) {
-  // Criamos o elemento de lista para passar como descrição
+
   const skillsList = (
     <ul className="space-y-2 mt-2">
       {items.map((item, index) => (

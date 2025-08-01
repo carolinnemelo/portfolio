@@ -1,12 +1,10 @@
 import { SectionTitle } from "./section-title";
 
-type Language = {
-  name: string;
+type Props = {
+  languages: string[];
 };
 
-type Props = {
-  languages: Language[];
-};
+
 
 export function LanguagesSection({ languages }: Props) {
   return (
@@ -15,8 +13,8 @@ export function LanguagesSection({ languages }: Props) {
       
       <ul className="text-base">
         {languages.map((language, index) => (
-          <li key={index} className="flex justify-between text-slate-600">
-            <span>{language.name}</span>
+          <li key={index} className="flex justify-between text-paragraph">
+            <span>{language}</span>
           </li>
         ))}
       </ul>
