@@ -21,9 +21,9 @@ export function ExperienceItem({
           {company} | {period}
         </span>
       </div>
-      <p className="text-paragraph text-sm mb-3">{summary}</p>
+      <p className="text-paragraph text-base mb-3">{summary}</p>
       {responsibilities && (
-        <ul className="list-disc text-sm pl-5 text-paragraph space-y-1">
+        <ul className="list-disc text-base pl-5 text-paragraph space-y-1">
           {responsibilities.map((responsibility, index) => (
             <li key={index}>{responsibility}</li>
           ))}

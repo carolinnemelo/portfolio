@@ -17,7 +17,7 @@ export function SkillsSection({ categories }: SkillsSectionProps) {
       {categories.map((category, index) => (
         <div key={index} className="mb-6">
           <h3 className="font-semibold mb-2">{category.title}</h3>
-          <ul className="text-sm text-paragraph">
+          <ul className="text-base text-paragraph">
             {category.skills.map((skill, skillIndex) => (
               <li key={skillIndex}>{skill}</li>
             ))}

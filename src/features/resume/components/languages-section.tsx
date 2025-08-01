@@ -13,7 +13,7 @@ export function LanguagesSection({ languages }: Props) {
     <section className="mb-8">
       <SectionTitle title="LANGUAGES" />
       
-      <ul className="text-sm">
+      <ul className="text-base">
         {languages.map((language, index) => (
           <li key={index} className="flex justify-between text-slate-600">
             <span>{language.name}</span>
