@@ -2,6 +2,13 @@ import type { Metadata } from "next";
 import { Fraunces, Roboto } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
+import Link from "next/link";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -33,6 +40,30 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link href="/">Home</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link href="/about">About</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link href="/projects">Projects</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link href="/contact">Contact</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
           {children}
         </ThemeProvider>
       </body>
