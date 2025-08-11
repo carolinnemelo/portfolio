@@ -8,9 +8,9 @@ export function About() {
     <section className="bg-white min-h-screen">
       <ProfileIntro
         name="Carolinne Melo"
-        title="Fullstack Web Developer"
+        title="— Fullstack Developer"
         description={
-          "I’m a naturally curious problem-solver who loves turning ideas into polished web experiences. I’m detail-oriented, thrive on collaboration, and enjoy crafting interfaces that feel intuitive and human. Always eager to learn and adapt, I bring energy and empathy to every project. Want to see how I work? Check out my projects and resume."
+          "I enjoy creating web apps that feel clear and easy to use. Here you can explore some of my projects and learn more about my journey."
         }
         portfolioUrl="/projects"
         resumeUrl="/resume"

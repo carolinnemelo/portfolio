@@ -20,14 +20,16 @@ export function ProfileIntro({
 }: Props) {
   return (
     <section className="flex items-center py-16 bg-secondary md:min-h-[50vh]">
-      <div className="px-4 md:px-16 ">
-        <h1 className="leading-loose text-4xl md:text-6xl font-bold font-accent bg-gradient-to-r from-blue-500 from-[10%] via-pink-500 via-[30%] to-yellow-500 to-[60%] bg-clip-text text-transparent">
-          {name}
-        </h1>
-        <h2 className="text-2xl text-slate-600 mb-6">{title}</h2>
+      <div className="px-4 md:px-16 md:max-w-7xl">
+        <div className="flex flex-col gap-2">
+          <h1 className="mb-0 leading-snug text-4xl md:text-6xl font-bold font-accent bg-gradient-to-r from-blue-500 from-[10%] via-pink-500 via-[30%] to-yellow-500 to-[60%] bg-clip-text text-transparent">
+            {name}
+          </h1>
+          <h2 className="text-2xl prose leading-tight">{title}</h2>
+        </div>
 
-        <div className="prose prose-slate max-w-none mb-8">
-          <p className="text-lg">{description}</p>
+        <div className="prose prose-slate max-w-none mb-8 mt-8">
+          <p className="text-xl">{description}</p>
         </div>
 
         <div className="flex flex-wrap gap-4">

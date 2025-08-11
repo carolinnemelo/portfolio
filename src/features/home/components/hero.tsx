@@ -4,7 +4,7 @@ import { FaGithub } from "react-icons/fa";
 
 export function Hero() {
   return (
-    <section className="flex flex-col items-center justify-center gap-16 md:flex-row-reverse bg-secondary pt-20 pb-16 md:py-32 px-2 md:px-16">
+    <section className="flex flex-col items-center justify-center gap-16 md:flex-row-reverse bg-secondary px-2 h-full md:px-16">
       <Image
         src={"/carolinne.avif"}
         alt="Carolinne Melo"
