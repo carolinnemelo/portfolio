@@ -33,7 +33,7 @@ export function ProfileIntro({
         </div>
 
         <div className="flex flex-wrap gap-4">
-          <Button asChild variant="accent" size={"lg"}>
+          <Button asChild variant="accent" size={"lg"} className="text-lg">
             <Link href={portfolioUrl} className="flex items-center gap-2">
               <FolderIcon />
               Projects
@@ -44,7 +44,7 @@ export function ProfileIntro({
             asChild
             variant="outline"
             size={"lg"}
-            className="border-slate-300 hover:bg-slate-100"
+            className="border-slate-300 hover:bg-slate-100 text-lg"
           >
             <Link href={resumeUrl} className="flex items-center gap-2">
               <FaFileAlt size={16} />

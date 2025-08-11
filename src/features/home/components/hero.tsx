@@ -1,10 +1,11 @@
 import { Button } from "@/components";
+import { Folder } from "lucide-react";
 import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
 
 export function Hero() {
   return (
-    <section className="py-20 flex flex-col items-center justify-center gap-16 md:flex-row-reverse bg-secondary px-2 h-full md:px-16 md:py-10">
+    <section className="py-20 flex flex-col items-center justify-center gap-10 md:flex-row-reverse bg-secondary px-2 h-full md:px-16 md:py-10">
       <Image
         src={"/carolinne.avif"}
         alt="Carolinne Melo"
@@ -30,6 +31,8 @@ export function Hero() {
           <br />
           This site is my playground and my portfolio.
         </p>
+        <div className="flex flex-wrap gap-4">
+
         <Button
           size="lg"
           variant={"accent"}
@@ -41,10 +44,26 @@ export function Hero() {
             href="https://github.com/carolinnemelo"
             className="flex items-center gap-2"
           >
+            <Folder />
+            Projects
+          </a>
+        </Button>
+        <Button
+          size="lg"
+          variant={"outline"}
+          className="text-lg w-fit border-slate-300 hover:bg-slate-100 disabled:bg-muted disabled:text-muted-foreground"
+        >
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/carolinnemelo"
+            className="flex items-center gap-2"
+          >
             <FaGithub />
             Github
           </a>
         </Button>
+        </div>
       </div>
     </section>
   );
