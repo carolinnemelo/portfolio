@@ -4,7 +4,7 @@ import { FaGithub } from "react-icons/fa";
 
 export function Hero() {
   return (
-    <section className="flex flex-col items-center justify-center gap-16 md:flex-row-reverse bg-secondary px-2 h-full md:px-16">
+    <section className="py-20 flex flex-col items-center justify-center gap-16 md:flex-row-reverse bg-secondary px-2 h-full md:px-16 md:py-10">
       <Image
         src={"/carolinne.avif"}
         alt="Carolinne Melo"
@@ -14,16 +14,16 @@ export function Hero() {
         className="outline-2 outline-offset-16 rounded-full outline-background"
       />
 
-      <div className="flex flex-col justify-center px-2 md:pt-16 gap-6 ">
+      <div className="flex flex-col justify-center px-2 gap-6 ">
         <div className="space-y-4">
-          <h1 className="leading-loose text-4xl md:text-6xl font-bold font-accent bg-gradient-to-r from-blue-500 from-[10%] via-pink-500 via-[30%] to-yellow-500 to-[60%] bg-clip-text text-transparent">
+          <h1 className="leading-snug text-5xl md:text-6xl font-bold font-accent bg-gradient-to-r from-blue-500 from-[10%] via-pink-500 via-[30%] to-yellow-500 to-[60%] bg-clip-text text-transparent">
             {"Hi, I'm Carolinne"}
           </h1>
-          <h2 className="text-2xl">
-            Frontend Developer | React + Next.js | UI/UX | Clean Code | CI/CD
+          <h2 className="text-xl md:text-2xl prose leading-tight">
+            — Fullstack Developer | React + Next.js | UI/UX | Clean Code | CI/CD
           </h2>
         </div>
-        <p>
+        <p className="max-w-7xl text-lg md:text-xl">
           My background is in architecture. Now I also design in code. I care
           about how things look and how they work. I build clean, useful
           interfaces using modern tools.
@@ -41,7 +41,7 @@ export function Hero() {
             href="https://github.com/carolinnemelo"
             className="flex items-center gap-2"
           >
-            <FaGithub/>
+            <FaGithub />
             Github
           </a>
         </Button>
