@@ -12,8 +12,8 @@ export function ResumeHeader({ name, title }: Props) {
   const contactInfo = [
     {
       Icon: FaPhone,
-      label:"+46 70 123 45 67",
-      href: "tel:+46701234567",
+      label: "+46 730343289",
+      href: "tel:+46730343289",
     },
     {
       Icon: FaEnvelope,
