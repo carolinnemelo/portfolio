@@ -1,6 +1,7 @@
 import { Button } from "@/components";
 import { Folder } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 
 export function Hero() {
@@ -32,37 +33,32 @@ export function Hero() {
           This site is my playground and my portfolio.
         </p>
         <div className="flex flex-wrap gap-4">
-
-        <Button
-          size="lg"
-          variant={"accent"}
-          className="text-lg w-fit disabled:bg-muted disabled:text-muted-foreground"
-        >
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://github.com/carolinnemelo"
-            className="flex items-center gap-2"
+          <Button
+            asChild
+            size="lg"
+            variant={"accent"}
+            className="text-lg w-fit disabled:bg-muted disabled:text-muted-foreground"
           >
-            <Folder />
-            Projects
-          </a>
-        </Button>
-        <Button
-          size="lg"
-          variant={"outline"}
-          className="text-lg w-fit border-slate-300 hover:bg-slate-100 disabled:bg-muted disabled:text-muted-foreground"
-        >
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://github.com/carolinnemelo"
-            className="flex items-center gap-2"
+            <Link href="/projects" className="flex items-center gap-2">
+              <Folder />
+              Projects
+            </Link>
+          </Button>
+          <Button
+            size="lg"
+            variant={"outline"}
+            className="text-lg w-fit border-slate-300 hover:bg-slate-100 disabled:bg-muted disabled:text-muted-foreground"
           >
-            <FaGithub />
-            Github
-          </a>
-        </Button>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/carolinnemelo"
+              className="flex items-center gap-2"
+            >
+              <FaGithub />
+              Github
+            </a>
+          </Button>
         </div>
       </div>
     </section>

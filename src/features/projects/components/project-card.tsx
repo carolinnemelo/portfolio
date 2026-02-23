@@ -17,6 +17,7 @@ export type ProjectCardProps = {
   description?: string;
   image: string;
   tags?: string[];
+  slug?: string;
   href?: string;
   githubUrl?: string;
   className?: string;
@@ -27,6 +28,7 @@ export function ProjectCard({
   description,
   image,
   tags = [],
+  slug,
   href,
   githubUrl,
   className = "",
@@ -63,7 +65,7 @@ export function ProjectCard({
             className="rounded-full p-0 m-0 w-[30px] h-[30px]"
           >
             <Link
-              href={href || "/projects"}
+              href={slug ? `/projects/${slug}` : href || "/projects"}
               className="flex items-center gap-2"
             >
               <ArrowRight />
