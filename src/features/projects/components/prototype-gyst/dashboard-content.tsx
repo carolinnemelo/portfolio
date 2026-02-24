@@ -1,15 +1,20 @@
+"use client";
+import { useState } from "react";
 import { DatePicker } from "./date-picker";
 import { CardSlider } from "./card-slider";
-
-
+import { Filter } from "./filter";
 
 export function DashboardContent({ isAiActive }: { isAiActive: boolean }) {
+  const [selectedPlatform, setSelectedPlatform] = useState("All");
+
   return (
     <div className="px-6 space-y-6">
-      {/* Dashboard content goes here */}
       <DatePicker />
-      <h1>Welcome Fulana</h1>
+
+      <h1 className="text-2xl font-bold text-slate-800">Welcome Fulana</h1>
+
       <CardSlider isAiActive={isAiActive} />
+      <Filter />
     </div>
   );
 }
