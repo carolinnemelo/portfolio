@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import type { ProjectDetail } from "@/features/projects/data/get-project-by-slug";
 import { GystDashboard } from "./prototype-gyst/dashboard";
+import { Separator } from "@/components/ui/separator";
+import { GalleryCarousel } from "./gallery-carousel";
 
 
 function getEmbedUrl(url: string): string {
@@ -42,13 +44,10 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
     slug,
   } = project;
 
-  const showEmbeddedDashboard =
-    slug === "focusflow-async-collaboration-dashboard" || slug ==="gyst";
-
   return (
-    <article className={`py-16 ${slug === "gyst" ? "" : "px-4"}`}>
+    <article className="py-16">
       <div className="max-w-4xl mx-auto space-y-16">
-        <header className="space-y-6">
+        <header className="space-y-10 px-4">
           <nav aria-label="Breadcrumb">
             <Link
               href="/projects"
@@ -59,145 +58,131 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             </Link>
           </nav>
 
-          <div className="flex flex-wrap gap-2">
-            {tags?.map((tag) => (
-              <Badge key={tag} variant="secondary">
-                {tag}
-              </Badge>
-            ))}
-          </div>
+          <section className=" space-y-6  ">
+            <div className="space-y-5">
+              <h1 className="text-4xl md:text-5xl font-semibold text-slate-900">
+                {title}
+              </h1>
+              <div className="h-px bg-slate-200" />
+              {(tags?.[0] || tags?.[1]) && (
+                <div className="flex items-center justify-between text-sm text-slate-500">
+                  {tags?.[0] && <span>{tags[0]}</span>}
+                  {tags?.[1] && <span>{tags[1]}</span>}
+                </div>
+              )}
+              {description && (
+                <p className="text-base md:text-lg text-slate-700 leading-relaxed max-w-2xl">
+                  {description}
+                </p>
+              )}
+            </div>
 
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-900">
-            {title}
-          </h1>
-
-          {description && (
-            <p className="text-lg text-slate-600">{description}</p>
-          )}
-
-          <div className="flex flex-wrap gap-3">
-            {githubUrl && (
-              <Button asChild variant="outline" size="sm">
-                <a href={githubUrl} target="_blank" rel="noopener noreferrer">
-                  GitHub
-                </a>
-              </Button>
-            )}
-            {href && (
-              <Button asChild size="sm">
-                <a href={href} target="_blank" rel="noopener noreferrer">
-                  Live demo
-                </a>
-              </Button>
-            )}
-          </div>
-
-          {image && (
-            <figure className="mt-8 overflow-hidden rounded-xl border bg-slate-100">
+            {image && (
               <Image
                 src={image}
                 alt={`${title} hero`}
                 width={1280}
                 height={720}
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover md:max-w-2xl md:mx-auto"
               />
-            </figure>
-          )}
+            )}
+          </section>
         </header>
 
-        {videoUrl && (
-          <section aria-labelledby="video-heading">
-            <h2
-              id="video-heading"
-              className="text-xl font-semibold text-slate-900 mb-4"
-            >
-              Project walkthrough
-            </h2>
-            <div className="aspect-video w-full overflow-hidden rounded-xl border bg-slate-950">
-              <iframe
-                src={getEmbedUrl(videoUrl)}
-                title={`${title} video`}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              />
+        <Separator className="my-8 bg-slate-200 drop-shadow-lg" />
+        <div className="px-4">
+          {(githubUrl || href) && (
+            <div className="flex flex-wrap gap-3">
+              {githubUrl && (
+                <Button asChild variant="outline" size="sm">
+                  <a href={githubUrl} target="_blank" rel="noopener noreferrer">
+                    GitHub
+                  </a>
+                </Button>
+              )}
+              {href && (
+                <Button asChild size="sm">
+                  <a href={href} target="_blank" rel="noopener noreferrer">
+                    Live demo
+                  </a>
+                </Button>
+              )}
             </div>
-          </section>
-        )}
+          )}
 
-        {overview && (
-          <section aria-labelledby="overview-heading">
-            <h2
-              id="overview-heading"
-              className="text-xl font-semibold text-slate-900 mb-4"
-            >
-              Overview
-            </h2>
-            <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">
-              {overview}
-            </p>
-          </section>
-        )}
+          {videoUrl && (
+            <section aria-labelledby="video-heading">
+              <h2
+                id="video-heading"
+                className="text-2xl font-semibold text-slate-900 mb-4"
+              >
+                Project walkthrough
+              </h2>
+              <div className="aspect-video w-full overflow-hidden rounded-xl border bg-slate-950">
+                <iframe
+                  src={getEmbedUrl(videoUrl)}
+                  title={`${title} video`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
+              </div>
+            </section>
+          )}
 
-        {gallery && gallery.length > 0 && (
-          <section aria-labelledby="gallery-heading">
-            <h2
-              id="gallery-heading"
-              className="text-xl font-semibold text-slate-900 mb-6"
-            >
-              Gallery
-            </h2>
-            <ul className="space-y-8">
-              {gallery.map((item, i) => (
-                <li key={i}>
-                  <figure className="overflow-hidden rounded-xl border bg-slate-100">
-                    {item.image && (
-                      <Image
-                        src={item.image}
-                        alt={item.caption || `Gallery image ${i + 1}`}
-                        width={1280}
-                        height={720}
-                        className="w-full h-auto object-cover"
-                      />
+          {overview && (
+            <section aria-labelledby="overview-heading">
+              <h2
+                id="overview-heading"
+                className="text-2xl font-semibold text-slate-900 mb-4"
+              >
+                Overview
+              </h2>
+              <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">
+                {overview}
+              </p>
+            </section>
+          )}
+
+          {gallery && gallery.length > 0 && (
+            <section aria-labelledby="gallery-heading">
+              <h2
+                id="gallery-heading"
+                className="text-2xl font-semibold text-slate-900 my-8"
+              >
+                Gallery
+              </h2>
+              <GalleryCarousel gallery={gallery} />
+            </section>
+          )}
+
+          {sections && sections.length > 0 && (
+            <section aria-labelledby="sections-heading">
+              <h2 id="sections-heading" className="sr-only">
+                Content sections
+              </h2>
+              <div className="space-y-12">
+                {sections.map((s, i) => (
+                  <section key={i} aria-labelledby={`section-${i}`}>
+                    <h3
+                      id={`section-${i}`}
+                      className="text-lg font-semibold text-slate-900 mb-3"
+                    >
+                      {s.title}
+                    </h3>
+                    {s.body && (
+                      <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">
+                        {s.body}
+                      </p>
                     )}
-                    {item.caption && (
-                      <figcaption className="p-4 text-sm text-slate-600 bg-slate-50">
-                        {item.caption}
-                      </figcaption>
-                    )}
-                  </figure>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
+                  </section>
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
 
-        {sections && sections.length > 0 && (
-          <section aria-labelledby="sections-heading">
-            <h2 id="sections-heading" className="sr-only">
-              Content sections
-            </h2>
-            <div className="space-y-12">
-              {sections.map((s, i) => (
-                <section key={i} aria-labelledby={`section-${i}`}>
-                  <h3
-                    id={`section-${i}`}
-                    className="text-lg font-semibold text-slate-900 mb-3"
-                  >
-                    {s.title}
-                  </h3>
-                  {s.body && (
-                    <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">
-                      {s.body}
-                    </p>
-                  )}
-                </section>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {(showEmbeddedDashboard || prototypeUrl) && (
+        {prototypeUrl && (
           <section
             aria-labelledby="prototype-heading"
             className="rounded-xl border bg-slate-50 p-8 text-center"
@@ -211,17 +196,11 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             <p className="text-slate-600 mb-6">
               Click below to test the interactive prototype.
             </p>
-            {showEmbeddedDashboard && (
-              <Button asChild size="lg">
-                <a
-                  href={prototypeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Open prototype
-                </a>
-              </Button>
-            )}
+            <Button asChild size="lg">
+              <a href={prototypeUrl} target="_blank" rel="noopener noreferrer">
+                Open prototype
+              </a>
+            </Button>
           </section>
         )}
         {slug === "gyst" && (
