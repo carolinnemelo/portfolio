@@ -46,7 +46,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
     slug === "focusflow-async-collaboration-dashboard" || slug ==="gyst";
 
   return (
-    <article className="py-16 px-4">
+    <article className={`py-16 ${slug === "gyst" ? "" : "px-4"}`}>
       <div className="max-w-4xl mx-auto space-y-16">
         <header className="space-y-6">
           <nav aria-label="Breadcrumb">
@@ -107,7 +107,10 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
 
         {videoUrl && (
           <section aria-labelledby="video-heading">
-            <h2 id="video-heading" className="text-xl font-semibold text-slate-900 mb-4">
+            <h2
+              id="video-heading"
+              className="text-xl font-semibold text-slate-900 mb-4"
+            >
               Project walkthrough
             </h2>
             <div className="aspect-video w-full overflow-hidden rounded-xl border bg-slate-950">
@@ -124,7 +127,10 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
 
         {overview && (
           <section aria-labelledby="overview-heading">
-            <h2 id="overview-heading" className="text-xl font-semibold text-slate-900 mb-4">
+            <h2
+              id="overview-heading"
+              className="text-xl font-semibold text-slate-900 mb-4"
+            >
               Overview
             </h2>
             <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">
@@ -135,7 +141,10 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
 
         {gallery && gallery.length > 0 && (
           <section aria-labelledby="gallery-heading">
-            <h2 id="gallery-heading" className="text-xl font-semibold text-slate-900 mb-6">
+            <h2
+              id="gallery-heading"
+              className="text-xl font-semibold text-slate-900 mb-6"
+            >
               Gallery
             </h2>
             <ul className="space-y-8">
@@ -171,7 +180,10 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             <div className="space-y-12">
               {sections.map((s, i) => (
                 <section key={i} aria-labelledby={`section-${i}`}>
-                  <h3 id={`section-${i}`} className="text-lg font-semibold text-slate-900 mb-3">
+                  <h3
+                    id={`section-${i}`}
+                    className="text-lg font-semibold text-slate-900 mb-3"
+                  >
                     {s.title}
                   </h3>
                   {s.body && (
@@ -190,7 +202,10 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             aria-labelledby="prototype-heading"
             className="rounded-xl border bg-slate-50 p-8 text-center"
           >
-            <h2 id="prototype-heading" className="text-xl font-semibold text-slate-900 mb-2">
+            <h2
+              id="prototype-heading"
+              className="text-xl font-semibold text-slate-900 mb-2"
+            >
               Try the prototype
             </h2>
             <p className="text-slate-600 mb-6">
@@ -211,7 +226,10 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
         )}
         {slug === "gyst" && (
           <section aria-labelledby="gyst-dashboard-heading">
-            <h2 id="gyst-dashboard-heading" className="text-xl font-semibold text-slate-900 mb-2">
+            <h2
+              id="gyst-dashboard-heading"
+              className="text-xl font-semibold text-slate-900 mb-2"
+            >
               Gyst Dashboard
             </h2>
             <GystDashboard />
