@@ -36,16 +36,24 @@ export function ProjectCard({
   return (
     <Card
       style={{ backgroundImage: `url(${image})` }}
-      className={cn("bg-cover bg- m-0 border-0 p-0 overflow-hidden flex", className, image ? "" : "bg-gradient-to-br from-primary/50 to-transparent")}
+      className={cn(
+        "bg-cover bg- m-0 border-0 p-0 overflow-hidden flex flex-col",
+        className,
+        image ? "" : "bg-gradient-to-br from-primary/50 to-transparent",
+      )}
     >
       <div className="h-56"></div>
-      <CardContent className="h-[50%] flex flex-col justify-between py-4 backdrop-blur-md border-0 m-0 bg-primary/35 [background-blend-mode:multiply]">
+      <CardContent className="flex-1 flex flex-col justify-between py-4 backdrop-blur-md border-0 m-0 bg-primary/35 [background-blend-mode:multiply]">
         <CardHeader className="text-white pl-0 font-bold">{title}</CardHeader>
         <CardDescription className="text-slate-300 flex flex-col gap-4">
           {description}
           <div className="flex flex-wrap gap-2">
             {tags.length > 0 &&
-              tags.map((tag) => <Badge variant={"secondary"} key={tag}>{tag}</Badge>)}
+              tags.map((tag) => (
+                <Badge variant={"secondary"} key={tag}>
+                  {tag}
+                </Badge>
+              ))}
           </div>
         </CardDescription>
 
