@@ -1,12 +1,10 @@
 "use client";
-import { useState } from "react";
+
 import { DatePicker } from "./date-picker";
 import { CardSlider } from "./card-slider";
 import { Filter } from "./filter";
 
 export function DashboardContent({ isAiActive }: { isAiActive: boolean }) {
-  const [selectedPlatform, setSelectedPlatform] = useState("All");
-
   return (
     <div className="px-6 space-y-6">
       <DatePicker />

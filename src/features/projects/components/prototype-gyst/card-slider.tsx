@@ -34,7 +34,7 @@ const CARDS = [
 export function CardSlider({ isAiActive }: { isAiActive: boolean }) {
   const [currentIndex, setCurrentIndex] = useState(1);
 
-  const handleDragEnd = (_: any, info: PanInfo) => {
+  const handleDragEnd = (_: unknown, info: PanInfo) => {
     if (info.offset.x > 50 && currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
     } else if (info.offset.x < -50 && currentIndex < CARDS.length - 1) {
@@ -112,7 +112,7 @@ function Card({
       </div>
       <div className="space-y-2">
 
-        <p className="text-base">You're killing it.</p>
+        <p className="text-base">{"You're killing it."} </p>
       </div>
     </div>
   );

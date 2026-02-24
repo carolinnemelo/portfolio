@@ -57,7 +57,9 @@ export function DatePicker() {
         {ranges.map((range, index) => (
           <button
             key={range}
-            ref={(el) => (buttonsRef.current[index] = el)}
+            ref={(el) => {
+              buttonsRef.current[index] = el;
+            }}
             onClick={() => setSelected(range)}
             className={
               "flex-1 rounded-full font-medium text-sm transition-colors" +
