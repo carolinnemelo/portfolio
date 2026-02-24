@@ -1,11 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import { DashboardContent } from "./dashboard-content";
 import { Navbar } from "./navbar";
 import { ThemeProvider, useGystTheme } from "./theme-context";
 
 function GystDashboardInner() {
   const { isDark } = useGystTheme();
+    const [isAiActive, setIsAiActive] = useState(false);
+
 
   return (
     <div
@@ -13,8 +16,8 @@ function GystDashboardInner() {
         isDark ? "bg-[#111823] text-gray-100" : "bg-white text-gray-900"
       }`}
     >
-      <Navbar />
-      <DashboardContent />
+      <Navbar isAiActive={isAiActive} setIsAiActive={setIsAiActive} />
+      <DashboardContent isAiActive={isAiActive} />
     </div>
   );
 }
