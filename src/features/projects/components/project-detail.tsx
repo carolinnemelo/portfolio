@@ -4,7 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import type { ProjectDetail } from "@/features/projects/data/get-project-by-slug";
-import { GystDashboard } from "@/features/projects/components/gyst-dashboard";
+import { GystDashboard } from "./prototype-gyst/dashboard";
+
 
 function getEmbedUrl(url: string): string {
   try {

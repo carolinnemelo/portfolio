@@ -10,6 +10,57 @@
   --font-accent: var(--font-fraunces);
 }
 
+/* Color scheme for Gyst Dashboard */
+@layer base {
+  :root {
+    /* Light Mode Colors */
+    --gyst-bg: 255 255 255;
+    --gyst-bg-secondary: 245 245 246;
+    --gyst-bg-tertiary: 241 245 249;
+    
+    --gyst-foreground: 17 24 39;
+    --gyst-foreground-secondary: 71 85 105;
+    --gyst-foreground-tertiary: 148 163 184;
+    
+    --gyst-primary: 169 214 21; /* A9D615 */
+    --gyst-primary-hover: 186 230 53;
+    --gyst-primary-active: 163 230 53;
+    
+    --gyst-accent: 173 250 29; /* ADFA1D */
+    --gyst-accent-secondary: 219 234 254;
+    
+    --gyst-border: 226 232 240;
+    --gyst-border-secondary: 241 245 249;
+    
+    --gyst-icon-bg: 148 163 184;
+    --gyst-icon-bg-hover: 100 116 139;
+  }
+
+  .dark {
+    /* Dark Mode Colors */
+    --gyst-bg: 17 24 39;
+    --gyst-bg-secondary: 37 42 54;
+    --gyst-bg-tertiary: 51 65 85;
+    
+    --gyst-foreground: 243 244 246;
+    --gyst-foreground-secondary: 209 213 219;
+    --gyst-foreground-tertiary: 156 163 175;
+    
+    --gyst-primary: 169 214 21; /* A9D615 */
+    --gyst-primary-hover: 186 230 53;
+    --gyst-primary-active: 163 230 53;
+    
+    --gyst-accent: 255 255 255;
+    --gyst-accent-secondary: 30 41 59;
+    
+    --gyst-border: 71 85 105;
+    --gyst-border-secondary: 55 65 81;
+    
+    --gyst-icon-bg: 71 85 105;
+    --gyst-icon-bg-hover: 100 116 139;
+  }
+}
+
 @theme {
   --animate-marquee: marquee 30s linear infinite;
   --animate-marquee-reverse: marquee-reverse 10s linear infinite;

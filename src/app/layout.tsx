@@ -33,8 +33,8 @@ export default function RootLayout({
       <body className={`${fraunces.variable} ${roboto.variable} antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <Navbar />
