@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
+import { X, ZoomIn, ZoomOut, RotateCcw } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -20,6 +21,33 @@ export function GalleryCarousel({ gallery }: GalleryCarouselProps) {
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
+  const [scale, setScale] = React.useState(1);
+  const [position, setPosition] = React.useState({ x: 0, y: 0 });
+
+  const handleZoomIn = () => setScale((prev) => Math.min(prev + 0.5, 3));
+  const handleZoomOut = () => setScale((prev) => Math.max(prev - 0.5, 1));
+  const handleReset = () => {
+    setScale(1);
+    setPosition({ x: 0, y: 0 });
+  };
+
+  const handleClose = () => {
+    setActiveIndex(null);
+    setScale(1);
+    setPosition({ x: 0, y: 0 });
+  };
+
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (scale > 1) {
+      setPosition((prev) => ({
+        x: prev.x - e.deltaX,
+        y: prev.y - e.deltaY,
+      }));
+    }
+  };
 
   React.useEffect(() => {
     if (!api) {
@@ -33,6 +61,19 @@ export function GalleryCarousel({ gallery }: GalleryCarouselProps) {
       setCurrent(api.selectedScrollSnap() + 1);
     });
   }, [api]);
+
+  // Prevent body scroll when overlay is open
+  React.useEffect(() => {
+    if (activeIndex !== null) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [activeIndex]);
 
   return (
     <div className="w-full">
@@ -94,35 +135,83 @@ export function GalleryCarousel({ gallery }: GalleryCarouselProps) {
 
       {activeIndex !== null && gallery[activeIndex]?.image && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-6"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 overflow-hidden"
           role="dialog"
           aria-modal="true"
           aria-label="Image preview"
-          onClick={() => setActiveIndex(null)}
+          onClick={handleClose}
+          onWheel={handleWheel}
         >
-          <div
-            className="relative max-w-5xl w-full"
-            onClick={(event) => event.stopPropagation()}
-          >
+          {/* Controls */}
+          <div className="absolute top-4 right-4 flex gap-2 z-10">
             <button
               type="button"
-              onClick={() => setActiveIndex(null)}
-              className="absolute -top-12 right-0 text-white text-sm"
+              className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleZoomIn();
+              }}
+              aria-label="Zoom in"
             >
-              Close
+              <ZoomIn className="size-5" />
             </button>
-            <Image
-              src={gallery[activeIndex].image}
-              alt={gallery[activeIndex].caption || "Gallery image"}
-              width={1600}
-              height={900}
-              className="w-full h-auto object-contain max-h-[85vh]"
-            />
-            {gallery[activeIndex].caption && (
-              <p className="mt-4 text-center text-sm text-slate-200">
-                {gallery[activeIndex].caption}
-              </p>
-            )}
+            <button
+              type="button"
+              className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleZoomOut();
+              }}
+              aria-label="Zoom out"
+            >
+              <ZoomOut className="size-5" />
+            </button>
+            <button
+              type="button"
+              className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleReset();
+              }}
+              aria-label="Reset zoom"
+            >
+              <RotateCcw className="size-5" />
+            </button>
+            <button
+              type="button"
+              className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
+              onClick={handleClose}
+              aria-label="Close"
+            >
+              <X className="size-5" />
+            </button>
+          </div>
+
+          {/* Image Container */}
+          <div
+            className="relative w-full h-full flex items-center justify-center p-4"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div
+              style={{
+                transform: `scale(${scale}) translate(${position.x / scale}px, ${position.y / scale}px)`,
+                transition: "transform 0.1s ease-out",
+              }}
+              className="flex items-center justify-center flex-col"
+            >
+              <Image
+                src={gallery[activeIndex].image}
+                alt={gallery[activeIndex].caption || "Gallery image"}
+                width={1600}
+                height={900}
+                className="max-w-full max-h-[90vh] object-contain"
+              />
+              {gallery[activeIndex].caption && (
+                <p className="mt-4 text-center text-sm text-slate-200">
+                  {gallery[activeIndex].caption}
+                </p>
+              )}
+            </div>
           </div>
         </div>
       )}

@@ -1,11 +1,13 @@
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import type { ProjectDetail } from "@/features/projects/data/get-project-by-slug";
 import { GystDashboard } from "./prototype-gyst/dashboard";
 import { Separator } from "@/components/ui/separator";
-import { GalleryCarousel } from "./gallery-carousel";
+import { RenderContentBlock } from "./render-content-block";
+import { ImageLightbox } from "./image-lightbox";
 
 
 function getEmbedUrl(url: string): string {
@@ -14,7 +16,7 @@ function getEmbedUrl(url: string): string {
     if (u.hostname.includes("youtube.com") && u.searchParams.has("v")) {
       return `https://www.youtube.com/embed/${u.searchParams.get("v")}`;
     }
-    if (u.hostname.includes("youtu.be")) {
+    if (u.hostname.includes("youtube")) {
       return `https://www.youtube.com/embed/${u.pathname.slice(1)}`;
     }
     return url;
@@ -33,19 +35,18 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
     description,
     image,
     tags,
-    href,
-    githubUrl,
     videoUrl,
     prototypeUrl,
     overview,
-    gallery,
-    sections,
+    contentImage,
+    numberOfBlocksWithImage,
+    contentBlocks,
     slug,
   } = project;
 
   return (
     <article className="py-16">
-      <div className="max-w-4xl mx-auto space-y-16">
+      <div className="max-w-6xl mx-auto space-y-16">
         <header className="space-y-10 px-4">
           <nav aria-label="Breadcrumb">
             <Link
@@ -77,12 +78,12 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             </div>
 
             {image && (
-              <Image
+              <ImageLightbox
                 src={image}
                 alt={`${title} hero`}
                 width={1280}
                 height={720}
-                className="w-full h-auto object-cover md:max-w-2xl md:mx-auto"
+                className="w-full h-auto object-cover "
               />
             )}
           </section>
@@ -90,7 +91,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
 
         <Separator className="my-8 bg-slate-200 drop-shadow-lg" />
         <div className="px-4">
-          {(githubUrl || href) && (
+          {/* {(githubUrl || href) && (
             <div className="flex flex-wrap gap-3">
               {githubUrl && (
                 <Button asChild variant="outline" size="sm">
@@ -106,6 +107,71 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                   </a>
                 </Button>
               )}
+            </div>
+          )} */}
+
+           {/* Overview with optional sidebar image */}
+          {(overview || (contentBlocks && contentBlocks.length > 0)) && contentImage && (numberOfBlocksWithImage ?? 0) > 0 ? (
+            <div className="grid gap-8 lg:grid-cols-[1fr_3fr] items-stretch">
+              {/* Image Sidebar */}
+              <div className="hidden lg:block">
+                <div className="relative w-full h-full">
+                  <ImageLightbox
+                    src={contentImage}
+                    alt={`${title} content`}
+                    fill
+                    sizes="350px"
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+
+              {/* Content with Image */}
+              <div className="space-y-12">
+                {overview && (
+                  <section aria-labelledby="overview-heading">
+                    <h2
+                      id="overview-heading"
+                      className="text-2xl font-semibold text-slate-900 mb-4"
+                    >
+                      Overview
+                    </h2>
+                    <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">
+                      {overview}
+                    </p>
+                  </section>
+                )}
+                {contentBlocks && contentBlocks.length > 0 && (
+                  <div className="space-y-12">
+                    {contentBlocks.slice(0, numberOfBlocksWithImage).map((block, index) => (
+                      <RenderContentBlock key={`block-${index}`} block={block} index={index} />
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : (
+            overview && (
+              <section aria-labelledby="overview-heading">
+                <h2
+                  id="overview-heading"
+                  className="text-2xl font-semibold text-slate-900 mb-4"
+                >
+                  Overview
+                </h2>
+                <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">
+                  {overview}
+                </p>
+              </section>
+            )
+          )}
+
+          {/* Content blocks not accompained by image */}
+          {contentBlocks && contentBlocks.length > 0 && (
+            <div className="space-y-12">
+              {contentBlocks.slice(numberOfBlocksWithImage ?? 0).map((block, index) => (
+                <RenderContentBlock key={`block-${(numberOfBlocksWithImage ?? 0) + index}`} block={block} index={(numberOfBlocksWithImage ?? 0) + index} />
+              ))}
             </div>
           )}
 
@@ -125,57 +191,6 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                   allowFullScreen
                   className="w-full h-full"
                 />
-              </div>
-            </section>
-          )}
-
-          {overview && (
-            <section aria-labelledby="overview-heading">
-              <h2
-                id="overview-heading"
-                className="text-2xl font-semibold text-slate-900 mb-4"
-              >
-                Overview
-              </h2>
-              <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">
-                {overview}
-              </p>
-            </section>
-          )}
-
-          {gallery && gallery.length > 0 && (
-            <section aria-labelledby="gallery-heading">
-              <h2
-                id="gallery-heading"
-                className="text-2xl font-semibold text-slate-900 my-8"
-              >
-                Gallery
-              </h2>
-              <GalleryCarousel gallery={gallery} />
-            </section>
-          )}
-
-          {sections && sections.length > 0 && (
-            <section aria-labelledby="sections-heading">
-              <h2 id="sections-heading" className="sr-only">
-                Content sections
-              </h2>
-              <div className="space-y-12">
-                {sections.map((s, i) => (
-                  <section key={i} aria-labelledby={`section-${i}`}>
-                    <h3
-                      id={`section-${i}`}
-                      className="text-lg font-semibold text-slate-900 mb-3"
-                    >
-                      {s.title}
-                    </h3>
-                    {s.body && (
-                      <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">
-                        {s.body}
-                      </p>
-                    )}
-                  </section>
-                ))}
               </div>
             </section>
           )}

@@ -29,7 +29,8 @@ export const projectType = defineType({
       name: 'videoUrl',
       title: 'Video URL',
       type: 'url',
-      description: 'YouTube, Vimeo, or Loom embed URL. Example: https://www.youtube.com/embed/VIDEO_ID',
+      description:
+        'YouTube, Vimeo, or Loom embed URL. Example: https://www.youtube.com/embed/VIDEO_ID',
     }),
     defineField({
       name: 'prototypeUrl',
@@ -69,6 +70,102 @@ export const projectType = defineType({
       type: 'text',
       rows: 5,
       description: 'Main explanatory text about the project.',
+    }),
+    defineField({
+      name: 'contentImage',
+      title: 'Content Image (Sidebar)',
+      type: 'image',
+      options: {hotspot: true},
+      description: 'Tall image that appears on the left side next to content blocks.',
+    }),
+    defineField({
+      name: 'numberOfBlocksWithImage',
+      title: 'Number of Blocks with Image',
+      type: 'number',
+      description:
+        'How many content blocks should have the sidebar image alongside them. If 0 or empty, no image appears.',
+      initialValue: 0,
+    }),
+    defineField({
+      name: 'contentBlocks',
+      title: 'Content Blocks',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'cardSection',
+          title: 'Card Section',
+          fields: [
+            {name: 'title', type: 'string', title: 'Section Title'},
+            {
+              name: 'items',
+              type: 'array',
+              title: 'Cards',
+              of: [{type: 'string'}],
+              validation: (rule) => rule.max(3),
+            },
+          ],
+          preview: {
+            select: {title: 'title'},
+            prepare: ({title}) => ({title: `📌 ${title || 'Card Section'}`}),
+          },
+        },
+        {
+          type: 'object',
+          name: 'gallery',
+          title: 'Gallery',
+          fields: [
+            {
+              name: 'gallery',
+              type: 'array',
+              title: 'Images',
+              of: [
+                {
+                  type: 'object',
+                  fields: [
+                    {name: 'image', type: 'image', title: 'Image', options: {hotspot: true}},
+                    {name: 'caption', type: 'string', title: 'Caption'},
+                  ],
+                  preview: {
+                    select: {media: 'image', title: 'caption'},
+                    prepare: ({media, title}) => ({media, title: title || 'Image'}),
+                  },
+                },
+              ],
+            },
+          ],
+          preview: {
+            prepare: () => ({title: '🖼️ Gallery'}),
+          },
+        },
+        {
+          type: 'object',
+          name: 'textBlock',
+          title: 'Text Block',
+          fields: [
+            {name: 'title', type: 'string', title: 'Heading'},
+            {name: 'body', type: 'text', title: 'Content', rows: 4},
+          ],
+          preview: {
+            select: {title: 'title'},
+            prepare: ({title}) => ({title: `📝 ${title || 'Text Block'}`}),
+          },
+        },
+        {
+          type: 'object',
+          name: 'video',
+          title: 'Video Block',
+          fields: [
+            {name: 'title', type: 'string', title: 'Heading'},
+            {name: 'videoUrl', type: 'url', title: 'Video URL'},
+          ],
+          preview: {
+            select: {title: 'title'},
+            prepare: ({title}) => ({title: `🎬 ${title || 'Video Block'}`}),
+          },
+        },
+      ],
+      description: 'Reorderable content blocks. Drag to rearrange.',
     }),
     defineField({
       name: 'sections',

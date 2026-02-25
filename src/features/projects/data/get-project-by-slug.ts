@@ -1,4 +1,5 @@
 import { client } from "@/sanity/client";
+import type { ContentBlock } from "../types/content-blocks";
 
 export type ProjectDetail = {
   title: string;
@@ -11,8 +12,11 @@ export type ProjectDetail = {
   videoUrl?: string;
   prototypeUrl?: string;
   overview?: string;
+  contentImage?: string;
+  numberOfBlocksWithImage?: number;
   gallery: { image: string; caption?: string }[];
   sections: { title: string; body?: string }[];
+  contentBlocks: ContentBlock[];
 };
 
 export async function getProjectBySlug(slug: string): Promise<ProjectDetail | null> {
@@ -28,6 +32,8 @@ export async function getProjectBySlug(slug: string): Promise<ProjectDetail | nu
       videoUrl,
       prototypeUrl,
       overview,
+      "contentImage": contentImage.asset->url,
+      numberOfBlocksWithImage,
       gallery[] {
         "image": image.asset->url,
         caption
@@ -35,6 +41,27 @@ export async function getProjectBySlug(slug: string): Promise<ProjectDetail | nu
       sections[] {
         title,
         body
+      },
+      contentBlocks[] {
+        _type,
+        _type == "cardSection" => {
+          title,
+          items
+        },
+        _type == "gallery" => {
+          "gallery": gallery[] {
+            "image": image.asset->url,
+            caption
+          }
+        },
+        _type == "textBlock" => {
+          title,
+          body
+        },
+        _type == "video" => {
+          title,
+          videoUrl
+        }
       }
     }
   `;
@@ -44,14 +71,6 @@ export async function getProjectBySlug(slug: string): Promise<ProjectDetail | nu
   if (!doc) {
     return null;
   }
-
-  console.log({
-    ...doc,
-    description: doc.description?.trim(),
-    sections: (doc.sections ?? []).map((section) => ({
-      title: (section?.title ?? "").trim(),
-      body: (section?.body ?? "").trim(),
-    })),});
 
   return doc;
 }
