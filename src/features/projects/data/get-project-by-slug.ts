@@ -1,4 +1,6 @@
 import { client } from "@/sanity/client";
+import { draftMode } from "next/headers";
+import { defineQuery } from "next-sanity";
 import type { ContentBlock } from "../types/content-blocks";
 
 export type ProjectDetail = {
@@ -12,6 +14,7 @@ export type ProjectDetail = {
   videoUrl?: string;
   prototypeUrl?: string;
   overview?: string;
+  overviewItems?: { label: string; content: string }[];
   contentImage?: string;
   numberOfBlocksWithImage?: number;
   gallery: { image: string; caption?: string }[];
@@ -19,8 +22,14 @@ export type ProjectDetail = {
   contentBlocks: ContentBlock[];
 };
 
-export async function getProjectBySlug(slug: string): Promise<ProjectDetail | null> {
-  const query = /* groq */ `
+export async function getProjectBySlug(
+  slug: string,
+): Promise<ProjectDetail | null> {
+  // Verifica se está em modo preview
+  const { isEnabled } = await draftMode();
+
+  // Define a query (importante pra live updates!)
+  const query = defineQuery(/* groq */ `
     *[_type == "project" && slug.current == $slug][0] {
       title,
       description,
@@ -32,6 +41,10 @@ export async function getProjectBySlug(slug: string): Promise<ProjectDetail | nu
       videoUrl,
       prototypeUrl,
       overview,
+      overviewItems[] {
+        label,
+        content
+      },
       "contentImage": contentImage.asset->url,
       numberOfBlocksWithImage,
       gallery[] {
@@ -44,12 +57,14 @@ export async function getProjectBySlug(slug: string): Promise<ProjectDetail | nu
       },
       contentBlocks[] {
         _type,
+        _key,
         _type == "cardSection" => {
           title,
           items
         },
         _type == "gallery" => {
-          "gallery": gallery[] {
+          gallery[] {
+            _key,
             "image": image.asset->url,
             caption
           }
@@ -64,9 +79,21 @@ export async function getProjectBySlug(slug: string): Promise<ProjectDetail | nu
         }
       }
     }
-  `;
+  `);
 
-  const doc = await client.fetch<ProjectDetail | null>(query, { slug });
+  // Busca com configurações especiais quando em preview
+  const doc = await client.fetch<ProjectDetail | null>(
+    query,
+    { slug },
+    isEnabled
+      ? {
+          perspective: "previewDrafts", // Busca rascunhos
+          useCdn: false, // Dados sempre frescos
+          stega: true, // Marca invisível pro clique funcionar
+          next: { revalidate: 0 }, // Sempre busca de novo
+        }
+      : { next: { revalidate: 60 } }, // Cache de 1 minuto no modo normal
+  );
 
   if (!doc) {
     return null;

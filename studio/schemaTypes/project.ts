@@ -46,30 +46,45 @@ export const projectType = defineType({
       description: 'Main image for the card and detail page header.',
     }),
     defineField({
-      name: 'gallery',
-      title: 'Gallery',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            {name: 'image', type: 'image', title: 'Image', options: {hotspot: true}},
-            {name: 'caption', type: 'string', title: 'Caption'},
-          ],
-          preview: {
-            select: {media: 'image', title: 'caption'},
-            prepare: ({media, title}) => ({media, title: title || 'Image'}),
-          },
-        },
-      ],
-      description: 'Mockups, research process photos, etc.',
-    }),
-    defineField({
       name: 'overview',
       title: 'Overview',
       type: 'text',
       rows: 5,
       description: 'Main explanatory text about the project.',
+    }),
+    defineField({
+      name: 'overviewItems',
+      title: 'Overview Details (Role, Focus, Scope, Timeline, etc.)',
+      type: 'array',
+      description:
+        'Add structured details like Role, Focus, Scope, Timeline. Order them as you prefer - icons are defined in code.',
+      of: [
+        {
+          type: 'object',
+          name: 'overviewItem',
+          title: 'Overview Item',
+          fields: [
+            {
+              name: 'label',
+              title: 'Label (e.g., Role, Focus, Scope, Timeline, Collaboration)',
+              type: 'string',
+            },
+            {
+              name: 'content',
+              title: 'Content',
+              type: 'text',
+              rows: 3,
+            },
+          ],
+          preview: {
+            select: {label: 'label', content: 'content'},
+            prepare: ({label, content}) => ({
+              title: `${label || 'Item'}`,
+              subtitle: content,
+            }),
+          },
+        },
+      ],
     }),
     defineField({
       name: 'contentImage',

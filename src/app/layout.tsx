@@ -3,6 +3,9 @@ import { Fraunces, Roboto } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components";
 import { Navbar } from "@/features/navbar/navbar";
+import { VisualEditing } from "next-sanity/visual-editing";
+import { draftMode } from "next/headers";
+import { DisableDraftMode } from "@/components/DisableDraftMode";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -23,11 +26,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { isEnabled } = await draftMode();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${fraunces.variable} ${roboto.variable} antialiased`}>
@@ -40,7 +45,14 @@ export default function RootLayout({
           <Navbar />
           <main>{children}</main>
         </ThemeProvider>
+        {isEnabled && (
+          <>
+            <VisualEditing />
+            <DisableDraftMode />
+          </>
+        )}
       </body>
     </html>
   );
 }
+

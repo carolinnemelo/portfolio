@@ -8,6 +8,8 @@ import { GystDashboard } from "./prototype-gyst/dashboard";
 import { Separator } from "@/components/ui/separator";
 import { RenderContentBlock } from "./render-content-block";
 import { ImageLightbox } from "./image-lightbox";
+import { getIconForLabel } from "@/features/projects/utils/overview-icons";
+
 
 
 function getEmbedUrl(url: string): string {
@@ -38,6 +40,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
     videoUrl,
     prototypeUrl,
     overview,
+    overviewItems,
     contentImage,
     numberOfBlocksWithImage,
     contentBlocks,
@@ -110,26 +113,88 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             </div>
           )} */}
 
-           {/* Overview with optional sidebar image */}
-          {(overview || (contentBlocks && contentBlocks.length > 0)) && contentImage && (numberOfBlocksWithImage ?? 0) > 0 ? (
+          {/* Overview with optional sidebar image */}
+          {(overview || (contentBlocks && contentBlocks.length > 0)) &&
+          contentImage &&
+          (numberOfBlocksWithImage ?? 0) > 0 ? (
             <div className="grid gap-8 lg:grid-cols-[1fr_3fr] items-stretch">
               {/* Image Sidebar */}
               <div className="hidden lg:block">
-                <div className="relative w-full h-full">
+                <div className="relative w-full h-full ">
                   <ImageLightbox
                     src={contentImage}
                     alt={`${title} content`}
                     fill
                     sizes="350px"
-                    className="object-contain"
+                    className="object-contain object-top-left "
                   />
                 </div>
               </div>
 
               {/* Content with Image */}
-              <div className="space-y-12">
-                {overview && (
+              <div className="space-y-8">
+                {(overview || (overviewItems && overviewItems.length > 0)) && (
                   <section aria-labelledby="overview-heading">
+                    <h2
+                      id="overview-heading"
+                      className="text-2xl font-semibold text-slate-900 mb-4"
+                    >
+                      Overview
+                    </h2>
+                    {overview && (
+                      <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">
+                        {overview}
+                      </p>
+                    )}
+                    {overviewItems && overviewItems.length > 0 && (
+                      <div className="rounded-lg border border-slate-200 bg-slate-50 p-6 mt-6">
+                        <div className="grid grid-cols-2 gap-4">
+                          {overviewItems.map((item, index) => {
+                            const IconComponent = getIconForLabel(item.label);
+                            return (
+                              <div
+                                key={`overview-item-${index}`}
+                                className="flex items-start gap-3"
+                              >
+                                {IconComponent && (
+                                  <IconComponent className="w-5 h-5 flex-shrink-0 text-slate-700 mt-0.5" />
+                                )}
+                                <div className="min-w-0">
+                                  <h3 className="text-sm font-semibold text-slate-900">
+                                    {item.label}
+                                  </h3>
+                                  <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                                    {item.content}
+                                  </p>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </section>
+                )}
+                {contentBlocks && contentBlocks.length > 0 && (
+                  <div className="space-y-12">
+                    {contentBlocks
+                      .slice(0, numberOfBlocksWithImage)
+                      .map((block, index) => (
+                        <RenderContentBlock
+                          key={`block-${index}`}
+                          block={block}
+                          index={index}
+                        />
+                      ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : (
+            (overview || (overviewItems && overviewItems.length > 0)) && (
+              <section aria-labelledby="overview-heading">
+                {overview && (
+                  <>
                     <h2
                       id="overview-heading"
                       className="text-2xl font-semibold text-slate-900 mb-4"
@@ -139,29 +204,35 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                     <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">
                       {overview}
                     </p>
-                  </section>
+                  </>
                 )}
-                {contentBlocks && contentBlocks.length > 0 && (
-                  <div className="space-y-12">
-                    {contentBlocks.slice(0, numberOfBlocksWithImage).map((block, index) => (
-                      <RenderContentBlock key={`block-${index}`} block={block} index={index} />
-                    ))}
+                {overviewItems && overviewItems.length > 0 && (
+                  <div className="rounded-lg border border-slate-200 bg-slate-50 p-6 mt-6">
+                    <div className="grid grid-cols-2 gap-4">
+                      {overviewItems.map((item, index) => {
+                        const IconComponent = getIconForLabel(item.label);
+                        return (
+                          <div
+                            key={`overview-item-${index}`}
+                            className="flex items-start gap-3"
+                          >
+                            {IconComponent && (
+                              <IconComponent className="w-5 h-5 flex-shrink-0 text-slate-700 mt-0.5" />
+                            )}
+                            <div className="min-w-0">
+                              <h3 className="text-sm font-semibold text-slate-900">
+                                {item.label}
+                              </h3>
+                              <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                                {item.content}
+                              </p>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
                 )}
-              </div>
-            </div>
-          ) : (
-            overview && (
-              <section aria-labelledby="overview-heading">
-                <h2
-                  id="overview-heading"
-                  className="text-2xl font-semibold text-slate-900 mb-4"
-                >
-                  Overview
-                </h2>
-                <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">
-                  {overview}
-                </p>
               </section>
             )
           )}
@@ -169,9 +240,15 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
           {/* Content blocks not accompained by image */}
           {contentBlocks && contentBlocks.length > 0 && (
             <div className="space-y-12">
-              {contentBlocks.slice(numberOfBlocksWithImage ?? 0).map((block, index) => (
-                <RenderContentBlock key={`block-${(numberOfBlocksWithImage ?? 0) + index}`} block={block} index={(numberOfBlocksWithImage ?? 0) + index} />
-              ))}
+              {contentBlocks
+                .slice(numberOfBlocksWithImage ?? 0)
+                .map((block, index) => (
+                  <RenderContentBlock
+                    key={`block-${(numberOfBlocksWithImage ?? 0) + index}`}
+                    block={block}
+                    index={(numberOfBlocksWithImage ?? 0) + index}
+                  />
+                ))}
             </div>
           )}
 

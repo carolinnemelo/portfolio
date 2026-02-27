@@ -1,5 +1,8 @@
 import { notFound } from "next/navigation";
-import { getProjects } from "@/features/projects/data/get-projects";
+import {
+  getProjects,
+  getProjectsStatic,
+} from "@/features/projects/data/get-projects";
 import { getProjectBySlug } from "@/features/projects/data/get-project-by-slug";
 import { ProjectDetail } from "@/features/projects/components/project-detail";
 
@@ -8,7 +11,8 @@ type PageParams = {
 };
 
 export async function generateStaticParams() {
-  const projects = await getProjects();
+  // Usa a versão estática (sem draftMode) pro build
+  const projects = await getProjectsStatic();
 
   return projects
     .filter((p) => p.slug)
