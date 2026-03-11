@@ -5,7 +5,7 @@ import type { ProjectCardProps } from "@/features/projects/components/project-ca
 
 type SanityProject = {
   title: string;
-  description?: string;
+  description?: string | PortableTextBlock[];
   tags?: string[];
   slug?: string;
   href?: string;
@@ -14,6 +14,38 @@ type SanityProject = {
   order?: number;
   image?: string;
 };
+
+type PortableTextBlock = {
+  _type: "block";
+  children?: Array<{
+    _type: "span";
+    text?: string;
+  }>;
+};
+
+function toPlainText(value?: string | PortableTextBlock[]): string | undefined {
+  if (typeof value === "string") {
+    const trimmed = value.trim();
+    return trimmed.length > 0 ? trimmed : undefined;
+  }
+
+  if (!Array.isArray(value)) {
+    return undefined;
+  }
+
+  const text = value
+    .filter((block) => block?._type === "block")
+    .map((block) =>
+      (block.children ?? [])
+        .filter((child) => child?._type === "span")
+        .map((child) => child.text ?? "")
+        .join(""),
+    )
+    .join("\n")
+    .trim();
+
+  return text.length > 0 ? text : undefined;
+}
 
 // Versão simples pro build (sem draftMode)
 export async function getProjectsStatic(): Promise<ProjectCardProps[]> {
@@ -36,7 +68,7 @@ export async function getProjectsStatic(): Promise<ProjectCardProps[]> {
 
   return items.map((p) => ({
     title: p.title,
-    description: p.description?.trim(),
+    description: toPlainText(p.description),
     image: p.image ?? "",
     tags: p.tags ?? [],
     slug: p.slug,
@@ -83,7 +115,7 @@ export async function getProjects(): Promise<ProjectCardProps[]> {
 
   return items.map((p) => ({
     title: p.title,
-    description: p.description?.trim(),
+    description: toPlainText(p.description),
     image: p.image ?? "",
     tags: p.tags ?? [],
     slug: p.slug,

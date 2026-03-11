@@ -11,6 +11,7 @@ interface ImageLightboxProps {
   height?: number;
   fill?: boolean;
   sizes?: string;
+  loading?: "lazy" | "eager";
   className?: string;
 }
 
@@ -21,6 +22,7 @@ export function ImageLightbox({
   height,
   fill,
   sizes,
+  loading,
   className,
 }: ImageLightboxProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,9 +43,8 @@ export function ImageLightbox({
   };
 
   const handleWheel = (e: React.WheelEvent) => {
-    e.preventDefault();
     e.stopPropagation();
-    
+
     if (scale > 1) {
       // Pan when zoomed
       setPosition((prev) => ({
@@ -56,13 +57,13 @@ export function ImageLightbox({
   // Prevent body scroll when overlay is open
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
-    
+
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [isOpen]);
 
@@ -70,7 +71,7 @@ export function ImageLightbox({
     <>
       {/* Clickable Image */}
       <div
-        className="cursor-pointer"
+        className={`cursor-pointer ${fill ? "relative w-full h-full" : ""}`}
         onClick={() => setIsOpen(true)}
         role="button"
         tabIndex={0}
@@ -86,6 +87,7 @@ export function ImageLightbox({
             alt={alt}
             fill
             sizes={sizes}
+            loading={loading}
             className={className}
           />
         ) : (
@@ -94,6 +96,7 @@ export function ImageLightbox({
             alt={alt}
             width={width || 1280}
             height={height || 720}
+            loading={loading}
             className={className}
           />
         )}

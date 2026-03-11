@@ -21,8 +21,28 @@ export const projectType = defineType({
     defineField({
       name: 'description',
       title: 'Description',
-      type: 'text',
-      rows: 3,
+      type: 'array',
+      of: [
+        {
+          type: 'block',
+          styles: [{title: 'Normal', value: 'normal'}],
+          lists: [],
+          marks: {
+            decorators: [
+              {title: 'Strong', value: 'strong'},
+              {title: 'Emphasis', value: 'em'},
+            ],
+            annotations: [
+              {
+                name: 'link',
+                type: 'object',
+                title: 'Link',
+                fields: [{name: 'href', type: 'url', title: 'URL'}],
+              },
+            ],
+          },
+        },
+      ],
       description: 'Short summary for the project card.',
     }),
     defineField({
@@ -48,8 +68,37 @@ export const projectType = defineType({
     defineField({
       name: 'overview',
       title: 'Overview',
-      type: 'text',
-      rows: 5,
+      type: 'array',
+      of: [
+        {
+          type: 'block',
+          styles: [
+            {title: 'Normal', value: 'normal'},
+            {title: 'H3', value: 'h3'},
+            {title: 'H4', value: 'h4'},
+            {title: 'Quote', value: 'blockquote'},
+          ],
+          lists: [
+            {title: 'Bullet', value: 'bullet'},
+            {title: 'Number', value: 'number'},
+          ],
+          marks: {
+            decorators: [
+              {title: 'Strong', value: 'strong'},
+              {title: 'Emphasis', value: 'em'},
+              {title: 'Code', value: 'code'},
+            ],
+            annotations: [
+              {
+                name: 'link',
+                type: 'object',
+                title: 'Link',
+                fields: [{name: 'href', type: 'url', title: 'URL'}],
+              },
+            ],
+          },
+        },
+      ],
       description: 'Main explanatory text about the project.',
     }),
     defineField({
@@ -72,16 +121,33 @@ export const projectType = defineType({
             {
               name: 'content',
               title: 'Content',
-              type: 'text',
-              rows: 3,
+              type: 'array',
+              of: [
+                {
+                  type: 'block',
+                  styles: [{title: 'Normal', value: 'normal'}],
+                  lists: [],
+                  marks: {
+                    decorators: [
+                      {title: 'Strong', value: 'strong'},
+                      {title: 'Emphasis', value: 'em'},
+                    ],
+                  },
+                },
+              ],
             },
           ],
           preview: {
             select: {label: 'label', content: 'content'},
-            prepare: ({label, content}) => ({
-              title: `${label || 'Item'}`,
-              subtitle: content,
-            }),
+            prepare: ({label, content}) => {
+              const text = Array.isArray(content)
+                ? (content[0]?.children ?? []).map((c: {text?: string}) => c.text ?? '').join('')
+                : (content ?? '')
+              return {
+                title: label || 'Item',
+                subtitle: text,
+              }
+            },
           },
         },
       ],
@@ -116,8 +182,59 @@ export const projectType = defineType({
               name: 'items',
               type: 'array',
               title: 'Cards',
-              of: [{type: 'string'}],
-              validation: (rule) => rule.max(3),
+              of: [
+                {
+                  type: 'object',
+                  name: 'cardItem',
+                  title: 'Card Item',
+                  fields: [
+                    {
+                      name: 'content',
+                      type: 'text',
+                      title: 'Content',
+                      rows: 3,
+                      validation: (rule) => rule.required(),
+                    },
+                    {
+                      name: 'title',
+                      type: 'string',
+                      title: 'Title (optional)',
+                      description: 'Rendered as H4 above the content text',
+                    },
+                    {
+                      name: 'footer',
+                      type: 'string',
+                      title: 'Footer (optional)',
+                      description: 'Rendered below content in a lighter gray',
+                    },
+                    {
+                      name: 'icon',
+                      type: 'string',
+                      title: 'Icon (optional)',
+                      description: 'Use an emoji or short icon text, e.g. 🚀',
+                    },
+                    {
+                      name: 'number',
+                      type: 'string',
+                      title: 'Number (optional)',
+                      description: 'Example: 23%, 10k+, #1',
+                    },
+                  ],
+                  preview: {
+                    select: {
+                      title: 'title',
+                      content: 'content',
+                      footer: 'footer',
+                      icon: 'icon',
+                      number: 'number',
+                    },
+                    prepare: ({title, content, footer, icon, number}) => ({
+                      title: title || content || 'Card Item',
+                      subtitle: icon || number || footer || 'Text only',
+                    }),
+                  },
+                },
+              ],
             },
           ],
           preview: {
@@ -159,7 +276,41 @@ export const projectType = defineType({
           title: 'Text Block',
           fields: [
             {name: 'title', type: 'string', title: 'Heading'},
-            {name: 'body', type: 'text', title: 'Content', rows: 4},
+            {
+              name: 'body',
+              type: 'array',
+              title: 'Content',
+              of: [
+                {
+                  type: 'block',
+                  styles: [
+                    {title: 'Normal', value: 'normal'},
+                    {title: 'H3', value: 'h3'},
+                    {title: 'H4', value: 'h4'},
+                    {title: 'Quote', value: 'blockquote'},
+                  ],
+                  lists: [
+                    {title: 'Bullet', value: 'bullet'},
+                    {title: 'Number', value: 'number'},
+                  ],
+                  marks: {
+                    decorators: [
+                      {title: 'Strong', value: 'strong'},
+                      {title: 'Emphasis', value: 'em'},
+                      {title: 'Code', value: 'code'},
+                    ],
+                    annotations: [
+                      {
+                        name: 'link',
+                        type: 'object',
+                        title: 'Link',
+                        fields: [{name: 'href', type: 'url', title: 'URL'}],
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
           ],
           preview: {
             select: {title: 'title'},
@@ -191,7 +342,41 @@ export const projectType = defineType({
           type: 'object',
           fields: [
             {name: 'title', type: 'string', title: 'Section Title'},
-            {name: 'body', type: 'text', title: 'Content', rows: 4},
+            {
+              name: 'body',
+              type: 'array',
+              title: 'Content',
+              of: [
+                {
+                  type: 'block',
+                  styles: [
+                    {title: 'Normal', value: 'normal'},
+                    {title: 'H3', value: 'h3'},
+                    {title: 'H4', value: 'h4'},
+                    {title: 'Quote', value: 'blockquote'},
+                  ],
+                  lists: [
+                    {title: 'Bullet', value: 'bullet'},
+                    {title: 'Number', value: 'number'},
+                  ],
+                  marks: {
+                    decorators: [
+                      {title: 'Strong', value: 'strong'},
+                      {title: 'Emphasis', value: 'em'},
+                      {title: 'Code', value: 'code'},
+                    ],
+                    annotations: [
+                      {
+                        name: 'link',
+                        type: 'object',
+                        title: 'Link',
+                        fields: [{name: 'href', type: 'url', title: 'URL'}],
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
           ],
           preview: {
             select: {title: 'title'},

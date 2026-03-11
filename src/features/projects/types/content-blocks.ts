@@ -5,10 +5,18 @@ export type ContentBlock =
   | TextBlockElement 
   | VideoBlock;
 
+export interface ProjectCardItem {
+  content: string;
+  title?: string;
+  footer?: string;
+  icon?: string;
+  number?: string;
+}
+
 export interface CardSectionBlock {
-  _type: 'cardSection';
+  _type: "cardSection";
   title: string;
-  items: string[];
+  items: ProjectCardItem[];
 }
 
 export interface GalleryBlock {
@@ -19,10 +27,21 @@ export interface GalleryBlock {
   }>;
 }
 
+export interface PortableTextSpan {
+  _type: "span";
+  text?: string;
+}
+
+export interface PortableTextBlock {
+  _type: "block";
+  style?: "normal" | "h3" | "h4" | "blockquote" | string;
+  children?: PortableTextSpan[];
+}
+
 export interface TextBlockElement {
-  _type: 'textBlock';
+  _type: "textBlock";
   title: string;
-  body: string;
+  body: string | PortableTextBlock[];
 }
 
 export interface VideoBlock {

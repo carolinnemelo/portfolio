@@ -38,9 +38,8 @@ export function GalleryCarousel({ gallery }: GalleryCarouselProps) {
   };
 
   const handleWheel = (e: React.WheelEvent) => {
-    e.preventDefault();
     e.stopPropagation();
-    
+
     if (scale > 1) {
       setPosition((prev) => ({
         x: prev.x - e.deltaX,
@@ -114,8 +113,8 @@ export function GalleryCarousel({ gallery }: GalleryCarouselProps) {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        <CarouselPrevious className="hidden sm:inline-flex" />
+        <CarouselNext className="hidden sm:inline-flex" />
       </Carousel>
       {count > 1 && (
         <div className="mt-4 flex items-center justify-center gap-2 sm:hidden">

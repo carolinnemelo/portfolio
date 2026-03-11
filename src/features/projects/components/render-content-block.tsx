@@ -1,8 +1,8 @@
-import Image from "next/image";
 import type {
   ContentBlock,
   CardSectionBlock,
   GalleryBlock,
+  ProjectCardItem,
   TextBlockElement,
   VideoBlock,
 } from "../types/content-blocks";
@@ -50,16 +50,41 @@ function CardSectionBlockComponent({
   block: CardSectionBlock;
   index: number;
 }) {
+  const renderCardValue = (item: ProjectCardItem) => {
+    if (item.icon?.trim()) {
+      return <span className="text-3xl leading-none">{item.icon}</span>;
+    }
+
+    if (item.number?.trim()) {
+      return (
+        <span className="text-5xl font-bold text-slate-400">{item.number}</span>
+      );
+    }
+
+    return null;
+  };
+
   return (
-    <section key={`card-section-${index}`} className="space-y-4 py-8">
+    <section key={`card-section-${index}`} className="space-y-4">
       <h3 className="text-2xl font-semibold text-slate-900">{block.title}</h3>
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-4 grid-cols-[repeat(auto-fit,minmax(220px,1fr))] items-stretch">
         {block.items?.map((item, itemIndex) => (
           <div
             key={`${block.title}-${itemIndex}`}
-            className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700 shadow-sm"
+            className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700 shadow-sm min-h-32 h-full flex flex-col gap-5"
           >
-            {item}
+            {renderCardValue(item)}
+            {item.title && (
+              <h4 className="text-base font-bold text-slate-800 leading-snug">
+                {item.title}
+              </h4>
+            )}
+            <p className="text-lg">{item.content}</p>
+            {item.footer && (
+              <p className="text-sm text-slate-400 mt-auto pt-1">
+                {item.footer}
+              </p>
+            )}
           </div>
         ))}
       </div>
@@ -91,12 +116,75 @@ function TextBlockComponent({
   block: TextBlockElement;
   index: number;
 }) {
+  const renderPortableText = () => {
+    if (typeof block.body === "string") {
+      return <p className="text-slate-700 whitespace-pre-wrap">{block.body}</p>;
+    }
+
+    return (
+      <div className="space-y-3">
+        {block.body.map((portableBlock, itemIndex) => {
+          if (portableBlock?._type !== "block") {
+            return null;
+          }
+
+          const text = (portableBlock.children ?? [])
+            .filter((child) => child?._type === "span")
+            .map((child) => child.text ?? "")
+            .join("")
+            .trim();
+
+          if (!text) {
+            return null;
+          }
+
+          if (portableBlock.style === "blockquote") {
+            return (
+              <blockquote
+                key={itemIndex}
+                className="border-l-4 border-slate-400 pl-4 py-4 text-slate-600 italic text-xl bg-slate-200"
+              >
+                {text}
+              </blockquote>
+            );
+          }
+
+          if (portableBlock.style === "h3") {
+            return (
+              <h3
+                key={itemIndex}
+                className="text-xl font-semibold text-slate-900"
+              >
+                {text}
+              </h3>
+            );
+          }
+
+          if (portableBlock.style === "h4") {
+            return (
+              <h4
+                key={itemIndex}
+                className="text-lg font-semibold text-slate-800"
+              >
+                {text}
+              </h4>
+            );
+          }
+
+          return (
+            <p key={itemIndex} className="text-slate-700 whitespace-pre-wrap">
+              {text}
+            </p>
+          );
+        })}
+      </div>
+    );
+  };
+
   return (
-    <section key={`text-${index}`} className="space-y-4 py-8">
+    <section key={`text-${index}`} className="space-y-3">
       <h2 className="text-2xl font-semibold text-slate-900">{block.title}</h2>
-      <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">
-        {block.body}
-      </p>
+      {renderPortableText()}
     </section>
   );
 }
